@@ -20,12 +20,6 @@ const userSchema = new Schema(
     isPhysiotherapist: {
       type: Boolean,
     },
-    isPatient: {
-      type: Boolean,
-    },
-    personType: {
-      type: String,
-    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

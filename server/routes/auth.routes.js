@@ -64,15 +64,12 @@ router.post("/signup", (req, res, next) => {
         password: hashedPassword,
         name,
         isPhysiotherapist,
-        isPatient,
-        personType,
       });
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
       // We should never expose passwords publicly
-      const { email, name, _id, isPhysiotherapist, isPatient, personType } =
-        createdUser;
+      const { email, name, _id, isPhysiotherapist } = createdUser;
 
       // Create a new object that doesn't expose the password
       const user = {
@@ -80,8 +77,6 @@ router.post("/signup", (req, res, next) => {
         name,
         _id,
         isPhysiotherapist,
-        isPatient,
-        personType,
       };
 
       // Send a json response containing the user object

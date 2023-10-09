@@ -9,17 +9,13 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isPhysiotherapist, setIsPhysiotherapist] = useState(false);
-  const [isPatient, setIsPatient] = useState(false);
-  const [personType, setPersonType] = useState("");
 
   const navigate = useNavigate();
 
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
-  const handlePhysiotherapist = (e) => setIsPhysiotherapist(!isPhysiotherapist);
-  const handlePatient = (e) => setIsPatient(!isPatient);
-  const handlePersonType = (e) => setPersonType(e.target.value);
+  const handlePhysiotherapist = (e) => setIsPhysiotherapist(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -29,8 +25,6 @@ function SignupPage() {
       password,
       name,
       isPhysiotherapist,
-      isPatient,
-      personType,
     };
 
     // Send a request to the server using axios
@@ -77,28 +71,11 @@ function SignupPage() {
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
 
-        <label>Are you:</label>
-        <input
-          type="checkbox"
-          name="physioterapist"
-          value={name}
-          onChange={handlePhysiotherapist}
-        />
-        <label>Physiotherapeut</label>
-
-        <input
-          type="checkbox"
-          name="patient"
-          // checked={isAgent}
-          onChange={handlePatient}
-        />
-        <label>Patient</label>
-
-        <label>Are you:2</label>
-        <select value={personType} onChange={handlePersonType}>
+        <label>Selecet your type:</label>
+        <select defaultValue="" onChange={handlePhysiotherapist}>
           <option value="">--Please choose an option--</option>
-          <option value="physioterapist">Physioterapist</option>
-          <option value="patient">Patient</option>
+          <option value={true}>Physioterapist</option>
+          <option value={false}>Patient</option>
         </select>
 
         <button type="submit">Sign Up</button>
