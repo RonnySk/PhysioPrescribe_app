@@ -13,8 +13,10 @@ import {
   Typography,
   createTheme,
   ThemeProvider,
+  ListItemIcon,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import Logout from "@mui/icons-material/Logout";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -70,54 +72,50 @@ function Navbar() {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
+                sx={{
+                  color: "black",
+                }}
                 MenuListProps={{
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem
-                  sx={{ backgroundColor: "#6aa9e9" }}
-                  onClick={handleClose}
-                >
-                  <Link href="#sobremim" underline="none" color="white">
-                    Sobre mim
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  sx={{ backgroundColor: "#6aa9e9" }}
-                  onClick={handleClose}
-                >
-                  <Link
-                    href="#terapiaOcupacional"
-                    underline="none"
-                    color="white"
-                  >
-                    Terapia Ocupacional
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  sx={{ backgroundColor: "#6aa9e9" }}
-                  onClick={handleClose}
-                >
-                  <Link href="#atendimento" underline="none" color="white">
-                    Áreas de Atendimento
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  sx={{ backgroundColor: "#6aa9e9" }}
-                  onClick={handleClose}
-                >
-                  <Link href="#espaco" underline="none" color="white">
-                    Espaço
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  sx={{ backgroundColor: "#6aa9e9" }}
-                  onClick={handleClose}
-                >
-                  <Link href="#contato" underline="none" color="white">
-                    Contato
-                  </Link>
-                </MenuItem>
+                {!isLoggedIn && (
+                  <>
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/login" underline="none" color="primary.dark">
+                        Login
+                      </Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Link
+                        href="/signup"
+                        underline="none"
+                        color="primary.dark"
+                      >
+                        Sign up
+                      </Link>
+                    </MenuItem>
+                  </>
+                )}
+                {isLoggedIn && (
+                  <>
+                    <MenuItem onClick={(handleClose, logOutUser)}>
+                      <ListItemIcon>
+                        <Logout
+                          sx={{ color: "primary.dark" }}
+                          fontSize="small"
+                        />
+                      </ListItemIcon>
+                      <Link
+                        href="#atendimento"
+                        underline="none"
+                        color="primary.dark"
+                      >
+                        Logout
+                      </Link>
+                    </MenuItem>
+                  </>
+                )}
               </Menu>
             </Box>
             <Box sx={{ display: { xs: "none", md: "block", lg: "block" } }}>
@@ -168,7 +166,7 @@ function Navbar() {
                 {isLoggedIn && (
                   <>
                     <Link
-                      href="/signup"
+                      href="/"
                       underline="none"
                       color="white"
                       sx={{
