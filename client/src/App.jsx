@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
@@ -18,15 +17,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
-
-        {/* <Route
-          path="/profile"
-          element={
-            <IsPrivate>
-              <ProfilePage />
-            </IsPrivate>
-          }
-        /> */}
 
         <Route
           path="/signup"
