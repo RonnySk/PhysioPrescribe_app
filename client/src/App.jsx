@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
+import HomePage from "./pages/HomPage/HomePage";
 
 function App() {
   return (
@@ -18,14 +19,14 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        <Route
+        {/* <Route
           path="/profile"
           element={
             <IsPrivate>
               <ProfilePage />
             </IsPrivate>
           }
-        />
+        /> */}
 
         <Route
           path="/signup"
@@ -41,6 +42,15 @@ function App() {
             <IsAnon>
               <LoginPage />
             </IsAnon>
+          }
+        />
+
+        <Route
+          path="/home"
+          element={
+            <IsPrivate>
+              <HomePage />
+            </IsPrivate>
           }
         />
       </Routes>
