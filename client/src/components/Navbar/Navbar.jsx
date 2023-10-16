@@ -35,7 +35,7 @@ function Navbar() {
       primary: {
         light: "#63ccff",
         main: "#009be5",
-        dark: "#006db3",
+        dark: "#00008B",
       },
     },
   });
@@ -65,7 +65,7 @@ function Navbar() {
                 onClick={handleClick}
                 color="inherit"
               >
-                <MenuIcon sx={{ color: "darkblue" }} />
+                <MenuIcon sx={{ color: "primary.dark" }} />
               </Button>
               <Menu
                 id="basic-menu"
