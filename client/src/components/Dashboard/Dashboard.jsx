@@ -53,7 +53,7 @@ function Dashboard() {
       {/* From here Mini Menu */}
       <Box
         sx={{
-          display: { xs: "flex", md: "none", lg: "none" },
+          display: { xs: "flex", sm: "none", md: "none", lg: "none" },
           justifyContent: "left",
           backgroundColor: "primary.main",
           borderTop: 1,

@@ -7,6 +7,7 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  Stack,
   styled,
   Typography,
 } from "@mui/material";
@@ -38,53 +39,110 @@ function HomePage() {
   console.log(user);
 
   return (
-    <Box>
-      {/* <Paperbase /> */}
+    <Box
+      sx={{
+        backgroundColor: "#EAEFF1",
+        display: { xs: "block", sm: "flex", md: "flex", lg: "flex" },
+        flexDirection: "row",
+        height: "100vh",
+      }}
+    >
       <Dashboard />
-      <Typography>Welcome {user.name}</Typography>
 
-      {user.isPhysiotherapist && (
-        <>
-          <Link>Patient</Link>
-          <Link>Exercises</Link>
-          <Link>New training Plan</Link>
-        </>
-      )}
+      <Box
+        sx={{
+          backgroundColor: "#EAEFF1",
+          display: { xs: "block", sm: "flex", md: "flex", lg: "flex" },
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <Typography>Welcome {user.name}</Typography>
 
-      {!user.isPhysiotherapist && (
-        <>
-          <Typography>Name: {user.name}</Typography>
+        {user.isPhysiotherapist && (
+          <Stack
+            direction="row"
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Link
+              sx={{
+                backgroundColor: "white",
+                border: 1,
+                borderRadius: 3,
+                p: 5,
+                width: 130,
+              }}
+              underline="none"
+            >
+              Patient
+            </Link>
+            <Link
+              href="/exercise"
+              sx={{
+                backgroundColor: "white",
+                border: 1,
+                borderRadius: 3,
+                p: 5,
+                width: 130,
+              }}
+              underline="none"
+            >
+              Exercises
+            </Link>
+            <Link
+              sx={{
+                backgroundColor: "white",
+                border: 1,
+                borderRadius: 3,
+                p: 5,
+                width: 130,
+              }}
+              underline="none"
+            >
+              New training Plan
+            </Link>
+          </Stack>
+        )}
 
-          <Grid item xs={12} md={6}>
-            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-              Your Trainings
-            </Typography>
-            <Demo>
-              <List dense={dense}>
-                {generate(
-                  <ListItem
-                    secondaryAction={
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    }
-                  >
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Single-line item"
-                      secondary={secondary ? "Secondary text" : null}
-                    />
-                  </ListItem>
-                )}
-              </List>
-            </Demo>
-          </Grid>
-        </>
-      )}
+        {!user.isPhysiotherapist && (
+          <>
+            <Typography>Name: {user.name}</Typography>
+
+            <Grid item xs={12} md={6}>
+              <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                Your Trainings
+              </Typography>
+              <Demo>
+                <List dense={dense}>
+                  {generate(
+                    <ListItem
+                      secondaryAction={
+                        <IconButton edge="end" aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                      }
+                    >
+                      <ListItemAvatar>
+                        <Avatar>
+                          <FolderIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary="Single-line item"
+                        secondary={secondary ? "Secondary text" : null}
+                      />
+                    </ListItem>
+                  )}
+                </List>
+              </Demo>
+            </Grid>
+          </>
+        )}
+      </Box>
     </Box>
   );
 }
