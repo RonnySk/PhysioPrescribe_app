@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
+import Exercises from "./pages/Exercises";
 
 function App() {
   return (
@@ -40,6 +41,15 @@ function App() {
           element={
             <IsPrivate>
               <HomePage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/exercises"
+          element={
+            <IsPrivate>
+              <Exercises />
             </IsPrivate>
           }
         />

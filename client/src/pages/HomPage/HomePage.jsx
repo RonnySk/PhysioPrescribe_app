@@ -16,7 +16,6 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import FolderIcon from "@mui/icons-material/Folder";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Paperbase from "../../components/Dashboard/Paperbase";
 import Dashboard from "../../components/Dashboard/Dashboard";
 
 function generate(element) {
@@ -54,19 +53,22 @@ function HomePage() {
           backgroundColor: "#EAEFF1",
           display: { xs: "block", sm: "flex", md: "flex", lg: "flex" },
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "flex-start",
+          alignItems: "center",
           width: "100vw",
           height: "100vh",
         }}
       >
-        <Typography>Welcome {user.name}</Typography>
+        <Typography color="primary.dark" sx={{ m: 7 }}>
+          WELCOME {user.name.toUpperCase()}
+        </Typography>
 
         {user.isPhysiotherapist && (
           <Stack
-            direction="row"
+            direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
             spacing={2}
             alignItems="center"
-            justifyContent="center"
+            justifyContent="flex-start"
           >
             <Link
               sx={{
@@ -74,20 +76,22 @@ function HomePage() {
                 border: 1,
                 borderRadius: 3,
                 p: 5,
-                width: 130,
+                width: 150,
+                fontSize: 20,
               }}
               underline="none"
             >
               Patient
             </Link>
             <Link
-              href="/exercise"
+              href="/exercises"
               sx={{
                 backgroundColor: "white",
                 border: 1,
                 borderRadius: 3,
                 p: 5,
-                width: 130,
+                width: 150,
+                fontSize: 20,
               }}
               underline="none"
             >
@@ -99,7 +103,8 @@ function HomePage() {
                 border: 1,
                 borderRadius: 3,
                 p: 5,
-                width: 130,
+                width: 150,
+                fontSize: 20,
               }}
               underline="none"
             >
