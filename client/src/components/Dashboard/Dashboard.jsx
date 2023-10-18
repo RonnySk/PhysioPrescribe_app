@@ -12,6 +12,7 @@ import {
 import React, { useContext } from "react";
 import AppsIcon from "@mui/icons-material/Apps";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import HomeIcon from "@mui/icons-material/Home";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { AuthContext } from "../../context/auth.context";
 
@@ -42,15 +43,48 @@ function Dashboard() {
         sx={{
           backgroundColor: "black",
           width: { sm: 256, md: 256 },
-          display: { xs: "none", sm: "block", md: "block", lg: "block" },
+          display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
           height: "100vh",
+          flexDirection: "column",
         }}
         position="static"
         color="white"
       >
-        Teste porra
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "left",
+
+            p: 2,
+            borderBottom: 0.5,
+            borderColor: "#808080",
+            "&:hover": {
+              backgroundColor: "#009BE514",
+            },
+          }}
+        >
+          <HomeIcon
+            sx={{ color: "#808080", marginRight: 1 }}
+            fontSize="small"
+          />
+          <Link
+            href="Home"
+            underline="none"
+            color="#808080"
+            sx={{
+              fontWeight: "bold",
+              ml: 1,
+            }}
+          >
+            Home
+          </Link>
+        </Box>
       </Box>
-      {/* From here Mini Menu */}
+
+      {/* From here Small Menu */}
+
       <Box
         sx={{
           display: { xs: "flex", sm: "none", md: "none", lg: "none" },

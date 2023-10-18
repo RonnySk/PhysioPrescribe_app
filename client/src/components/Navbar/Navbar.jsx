@@ -56,6 +56,9 @@ function Navbar() {
             >
               PhysioPrescribe
             </Typography>
+
+            {/* Small Menu */}
+
             <Box sx={{ display: { xs: "block", md: "none", lg: "none" } }}>
               <Button
                 id="basic-button"
@@ -118,6 +121,9 @@ function Navbar() {
                 )}
               </Menu>
             </Box>
+
+            {/* Normal menu */}
+
             <Box sx={{ display: { xs: "none", md: "block", lg: "block" } }}>
               <Stack direction="row" spacing={2}>
                 {!isLoggedIn && (
