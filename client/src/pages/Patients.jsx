@@ -1,8 +1,10 @@
 import { Box } from "@mui/system";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
 import appService from "../services/app.service";
+import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import { Typography } from "@mui/material";
+
 function Patients() {
   const [allPatients, setAllPatients] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -11,7 +13,8 @@ function Patients() {
     appService
       .getAllPatients()
       .then((response) => {
-        setAllPatients(response.data);
+        const { allPatients } = response.data;
+        setAllPatients(allPatients);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -19,7 +22,6 @@ function Patients() {
       });
   }, []);
 
-  console.log(allPatients);
   //   const getAllPatients = () => {
   //     axios.get();
   //   };
@@ -45,7 +47,28 @@ function Patients() {
           width: "100vw",
           height: "100vh",
         }}
-      ></Box>
+      >
+        {allPatients.length === 0 ? (
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              mt: 15,
+            }}
+          >
+            <HourglassTopIcon
+              sx={{ color: "#808080", mb: 2 }}
+              fontSize="medium"
+            />
+            <Typography sx={{ fontSize: 25 }} color="#808080">
+              Loading...
+            </Typography>
+          </Box>
+        ) : (
+          allPatients.map((patient) => <Typography>{patient.name}</Typography>)
+        )}
+      </Box>
     </Box>
   );
 }

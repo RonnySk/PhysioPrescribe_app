@@ -95,7 +95,7 @@ function Dashboard() {
         >
           <PeopleIcon sx={{ color: "#808080", margin: 1 }} fontSize="small" />
           <Link
-            href="/trainings"
+            href="/patients"
             underline="none"
             color="#808080"
             sx={{
