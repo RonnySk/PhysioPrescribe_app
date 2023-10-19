@@ -7,13 +7,14 @@ import {
   MenuItem,
   ThemeProvider,
   Typography,
-  useRadioGroup,
 } from "@mui/material";
 import React, { useContext } from "react";
 import AppsIcon from "@mui/icons-material/Apps";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import HomeIcon from "@mui/icons-material/Home";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import SettingsIcon from "@mui/icons-material/Settings";
+import PeopleIcon from "@mui/icons-material/People";
 import { AuthContext } from "../../context/auth.context";
 
 function Dashboard() {
@@ -30,7 +31,7 @@ function Dashboard() {
   let theme = createTheme({
     palette: {
       primary: {
-        light: "#63ccff",
+        light: "#1976D2",
         main: "#009be5",
         dark: "#00008B",
       },
@@ -59,18 +60,42 @@ function Dashboard() {
 
             p: 2,
             borderBottom: 0.5,
-            borderColor: "#808080",
+            borderColor: "#009BE514",
             "&:hover": {
               backgroundColor: "#009BE514",
             },
           }}
         >
-          <HomeIcon
-            sx={{ color: "#808080", marginRight: 1 }}
-            fontSize="small"
-          />
+          <HomeIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
           <Link
             href="Home"
+            underline="none"
+            color="#808080"
+            sx={{
+              fontWeight: "bold",
+              ml: 2,
+            }}
+          >
+            Home
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: "#101F33",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "left",
+
+            p: 2,
+            "&:hover": {
+              backgroundColor: "#3b82f680",
+            },
+          }}
+        >
+          <PeopleIcon sx={{ color: "#808080", margin: 1 }} fontSize="small" />
+          <Link
+            href="/trainings"
             underline="none"
             color="#808080"
             sx={{
@@ -78,7 +103,93 @@ function Dashboard() {
               ml: 1,
             }}
           >
-            Home
+            Patients
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: "#101F33",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "left",
+
+            p: 2,
+            "&:hover": {
+              backgroundColor: "#3b82f680",
+            },
+          }}
+        >
+          <FitnessCenterIcon
+            sx={{ color: "#808080", ml: 1 }}
+            fontSize="small"
+          />
+          <Link
+            href="/trainings"
+            underline="none"
+            color="#808080"
+            sx={{
+              fontWeight: "bold",
+              ml: 2,
+            }}
+          >
+            Exercises
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: "#101F33",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "left",
+
+            p: 2,
+            "&:hover": {
+              backgroundColor: "#3b82f680",
+            },
+          }}
+        >
+          <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+          <Link
+            href="/trainings"
+            underline="none"
+            color="#808080"
+            sx={{
+              fontWeight: "bold",
+              ml: 2,
+            }}
+          >
+            Trainings Plan
+          </Link>
+        </Box>
+        <Box
+          sx={{
+            backgroundColor: "#101F33",
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "left",
+
+            p: 2,
+            borderBottom: 0.5,
+            borderColor: "#009BE514",
+            "&:hover": {
+              backgroundColor: "#3b82f680",
+            },
+          }}
+        >
+          <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+          <Link
+            href="/trainings"
+            underline="none"
+            color="#808080"
+            sx={{
+              fontWeight: "bold",
+              ml: 2,
+            }}
+          >
+            Settings
           </Link>
         </Box>
       </Box>
@@ -108,29 +219,64 @@ function Dashboard() {
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
-          sx={{
-            color: "black",
-          }}
           MenuListProps={{
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>
-            <FolderOpenIcon
-              sx={{ color: "primary.dark", marginRight: 1 }}
+          <MenuItem
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "#EAEFF1",
+            }}
+          >
+            <PeopleIcon
+              sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/login" underline="none" color="primary.dark">
-              Your Trainings
+            <Link href="/login" underline="none" color="primary.light">
+              Patients
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <AccountCircleIcon
-              sx={{ color: "primary.dark", marginRight: 1 }}
+          <MenuItem
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "#EAEFF1",
+            }}
+          >
+            <FitnessCenterIcon
+              sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/signup" underline="none" color="primary.dark">
-              Account
+            <Link href="/login" underline="none" color="primary.light">
+              Exercises
+            </Link>
+          </MenuItem>
+          <MenuItem
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "#EAEFF1",
+            }}
+          >
+            <FolderOpenIcon
+              sx={{ color: "primary.light", marginRight: 1 }}
+              fontSize="small"
+            />
+            <Link href="/login" underline="none" color="primary.light">
+              Trainings Plan
+            </Link>
+          </MenuItem>
+          <MenuItem
+            onClick={handleClose}
+            sx={{
+              backgroundColor: "#EAEFF1",
+            }}
+          >
+            <SettingsIcon
+              sx={{ color: "primary.light", marginRight: 1 }}
+              fontSize="small"
+            />
+            <Link href="/signup" underline="none" color="primary.light">
+              Settings
             </Link>
           </MenuItem>
         </Menu>
