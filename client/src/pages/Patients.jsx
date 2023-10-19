@@ -22,10 +22,6 @@ function Patients() {
       });
   }, []);
 
-  //   const getAllPatients = () => {
-  //     axios.get();
-  //   };
-
   return (
     <Box
       sx={{
