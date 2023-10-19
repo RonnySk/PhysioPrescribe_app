@@ -71,6 +71,7 @@ function HomePage() {
             justifyContent="flex-start"
           >
             <Link
+              href="/patients"
               sx={{
                 backgroundColor: "white",
                 border: 1,

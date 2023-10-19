@@ -10,6 +10,7 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
+import Patients from "./pages/Patients";
 
 function App() {
   return (
@@ -50,6 +51,15 @@ function App() {
           element={
             <IsPrivate>
               <Exercises />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/patients"
+          element={
+            <IsPrivate>
+              <Patients />
             </IsPrivate>
           }
         />
