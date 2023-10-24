@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import Dashboard from "../components/Dashboard/Dashboard";
+import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
+import ExerciseCard from "../components/ExerciseCard";
 
 function Exercises() {
   const [name, setName] = useState("");
@@ -99,7 +100,7 @@ function Exercises() {
               width: { sm: "90%", md: "80%" },
             }}
           >
-            <Typography variant="h4" sx={{ color: "#808080", mt: 2 }}>
+            <Typography variant="h4" color="#808080" mt={2}>
               Exercises
             </Typography>
             <form style={{ width: "100%" }}>
@@ -203,11 +204,7 @@ function Exercises() {
               </Typography>
             ) : (
               exercises.map((exercise) => (
-                <Stack border={1} spacing={2}>
-                  <Typography m={2} variant="h1" fontSize={20}>
-                    {exercise.name}
-                  </Typography>
-                </Stack>
+                <ExerciseCard oneExercise={exercise} />
               ))
             )}
           </Box>

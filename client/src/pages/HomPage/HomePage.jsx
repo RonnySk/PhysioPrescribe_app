@@ -16,7 +16,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import FolderIcon from "@mui/icons-material/Folder";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Dashboard from "../../components/Dashboard/Dashboard";
+import Dashboard from "../../components/Dashboard";
 
 function generate(element) {
   return [0, 1, 2].map((value) =>

@@ -15,7 +15,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PeopleIcon from "@mui/icons-material/People";
-import { AuthContext } from "../../context/auth.context";
+import { AuthContext } from "../context/auth.context";
 
 function Dashboard() {
   const { user } = useContext(AuthContext);
@@ -233,7 +233,7 @@ function Dashboard() {
               sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/login" underline="none" color="primary.light">
+            <Link href="/patients" underline="none" color="primary.light">
               Patients
             </Link>
           </MenuItem>
@@ -247,7 +247,7 @@ function Dashboard() {
               sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/login" underline="none" color="primary.light">
+            <Link href="/exercises" underline="none" color="primary.light">
               Exercises
             </Link>
           </MenuItem>
@@ -261,7 +261,7 @@ function Dashboard() {
               sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/login" underline="none" color="primary.light">
+            <Link href="/trainingsPlan" underline="none" color="primary.light">
               Trainings Plan
             </Link>
           </MenuItem>
@@ -275,7 +275,7 @@ function Dashboard() {
               sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/signup" underline="none" color="primary.light">
+            <Link href="/settings" underline="none" color="primary.light">
               Settings
             </Link>
           </MenuItem>

@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import Dashboard from "../components/Dashboard/Dashboard";
+import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import { Typography } from "@mui/material";
