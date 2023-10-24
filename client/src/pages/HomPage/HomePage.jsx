@@ -35,8 +35,6 @@ function HomePage() {
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
 
-  console.log(user);
-
   return (
     <Box
       sx={{
