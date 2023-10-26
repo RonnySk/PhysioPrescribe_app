@@ -45,7 +45,6 @@ function Dashboard() {
           backgroundColor: "black",
           width: { sm: 256, md: 256 },
           display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
-          height: "100vh",
           flexDirection: "column",
         }}
         position="static"

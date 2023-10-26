@@ -85,7 +85,7 @@ function Exercises() {
             justifyContent: "flex-start",
             alignItems: "center",
             width: "100vw",
-            height: "100vh",
+            // height: "100vh",
             mt: 5,
           }}
         >
