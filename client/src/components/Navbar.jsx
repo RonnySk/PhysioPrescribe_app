@@ -14,6 +14,7 @@ import {
   createTheme,
   ThemeProvider,
   ListItemIcon,
+  IconButton,
 } from "@mui/material";
 import { Image } from "mui-image";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -47,7 +48,9 @@ function Navbar() {
       <Box flexGrow={1}>
         <AppBar sx={{ backgroundColor: "primary" }} position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Image src={logoSide} duration={0} width={250} />
+            <IconButton href="/">
+              <Image src={logoSide} duration={0} width={250} />
+            </IconButton>
 
             {/* Small Menu */}
 
