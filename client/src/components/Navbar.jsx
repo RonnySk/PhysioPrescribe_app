@@ -15,8 +15,10 @@ import {
   ThemeProvider,
   ListItemIcon,
 } from "@mui/material";
+import { Image } from "mui-image";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logout from "@mui/icons-material/Logout";
+import logoSide from "../images/logo_side.png";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
@@ -45,17 +47,7 @@ function Navbar() {
       <Box flexGrow={1}>
         <AppBar sx={{ backgroundColor: "primary" }} position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
-            <Typography
-              component="a"
-              href="/"
-              sx={{
-                color: "inherit",
-                textDecoration: "none",
-                fontSize: 30,
-              }}
-            >
-              PhysioPrescribe
-            </Typography>
+            <Image src={logoSide} duration={0} width={250} />
 
             {/* Small Menu */}
 

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import SignupPage from "./pages/SignupPage/SignupPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import LandingPage from "./pages/LandingPage/LandingPage";
+import LandingPage from "./pages/LandingPage";
 
 import Navbar from "./components/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";

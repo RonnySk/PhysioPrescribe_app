@@ -56,7 +56,6 @@ function Dashboard() {
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "left",
-
             p: 2,
             borderBottom: 0.5,
             borderColor: "#009BE514",
