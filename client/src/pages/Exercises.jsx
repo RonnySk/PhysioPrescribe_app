@@ -85,19 +85,20 @@ function Exercises() {
             justifyContent: "flex-start",
             alignItems: "center",
             width: "100vw",
-            // height: "100vh",
+            height: "100%",
             mt: 5,
           }}
         >
           <Box
+            mb={4}
             sx={{
               backgroundColor: "white",
-              display: { xs: "flex", sm: "flex", md: "flex", lg: "flex" },
+              display: "flex",
               flexDirection: "column",
               justifyContent: "flex-start",
               alignItems: "center",
               borderRadius: 5,
-              width: { sm: "90%", md: "80%" },
+              width: { xs: "90%", sm: "90%", md: "80%" },
             }}
           >
             <Typography variant="h4" color="#808080" mt={2}>
@@ -109,7 +110,7 @@ function Exercises() {
                 spacing={{ xs: 2, sm: 2, md: 4 }}
                 sx={{
                   backgroundColor: "white",
-                  display: { xs: "flex", sm: "flex", md: "flex", lg: "flex" },
+                  display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",

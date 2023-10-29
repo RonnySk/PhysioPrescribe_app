@@ -58,7 +58,6 @@ function LandingPage() {
           Start your training now!
         </Button>
       </Stack>
-
       <Stack
         sx={{
           backgroundColor: "#009be5",
