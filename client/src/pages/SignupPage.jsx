@@ -1,50 +1,63 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
-import authService from "../services/auth.service";
-import { Box, Stack, ThemeProvider } from "@mui/system";
-import bgImg from "../images/backgroundLines.png";
 import {
-  createTheme,
-  TextField,
-  Typography,
+  Box,
   Button,
-  Divider,
+  createTheme,
+  Stack,
+  TextField,
+  ThemeProvider,
+  Typography,
   Link,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
 } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import authService from "../services/auth.service";
+import bgImg from "../images/backgroundLines.png";
 
-function LoginPage() {
+function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isPhysiotherapist, setIsPhysiotherapist] = useState(false);
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
-
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+  const handleName = (e) => setName(e.target.value);
+  const handlePhysiotherapist = (e) => setIsPhysiotherapist(e.target.value);
 
-  const handleLoginSubmit = (e) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { email, password };
+    // Create an object representing the request body
+    const requestBody = {
+      email,
+      password,
+      name,
+      isPhysiotherapist,
+    };
 
     // Send a request to the server using axios
     /* 
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/auth/login`)
-      .then((response) => {})
+    const authToken = localStorage.getItem("authToken");
+    axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/auth/signup`, 
+      requestBody, 
+      { headers: { Authorization: `Bearer ${authToken}` },
+    })
+    .then((response) => {})
     */
 
     // Or using a service
     authService
-      .login(requestBody)
+      .signup(requestBody)
       .then((response) => {
-        // If the POST request is successful store the authentication token,
-        // after the token is stored authenticate the user
-        // and at last navigate to the home page
-        storeToken(response.data.authToken);
-        authenticateUser();
-        navigate("/home");
+        // If the POST request is successful redirect to the login page
+        navigate("/login");
       })
       .catch((error) => {
         // If the request resolves with an error, set the error message in the state
@@ -63,6 +76,7 @@ function LoginPage() {
     },
   });
 
+  console.log("isPhysiotherapist", isPhysiotherapist);
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -93,12 +107,12 @@ function LoginPage() {
           }}
         >
           <Typography variant="h3" color="#808080">
-            LOGIN
+            SIGN UP
           </Typography>
           <Typography variant="p" color="#808080">
-            Not member yet?
-            <Link href="/signup" color="#808080" ml={1}>
-              Sign Up here
+            Already have account?
+            <Link href="/login" color="#808080" ml={1}>
+              Login here
             </Link>
           </Typography>
           <TextField
@@ -116,6 +130,29 @@ function LoginPage() {
             onChange={handlePassword}
             sx={{ width: "80%" }}
           />
+
+          <TextField
+            required
+            label="Name"
+            variant="outlined"
+            onChange={handleName}
+            sx={{ width: "80%" }}
+          />
+          <FormControl sx={{ width: "80%" }}>
+            <InputLabel id="demo-simple-select-label">
+              Patient/Therapeut
+            </InputLabel>
+            <Select
+              id="demo-simple-select-label"
+              value={isPhysiotherapist}
+              label="Patient/Therapeut"
+              onChange={handlePhysiotherapist}
+            >
+              <MenuItem value={true}>Therapeut</MenuItem>
+              <MenuItem value={false}>Patient</MenuItem>
+            </Select>
+          </FormControl>
+
           {errorMessage && (
             <Typography variant="p" color="#808080">
               {errorMessage}
@@ -131,9 +168,9 @@ function LoginPage() {
               width: "80%",
               p: 2,
             }}
-            onClick={handleLoginSubmit}
+            onClick={handleSignupSubmit}
           >
-            LOGIN
+            SIGNUP
           </Button>
         </Stack>
       </Box>
@@ -141,4 +178,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default SignupPage;

@@ -49,7 +49,7 @@ function Navbar() {
         <AppBar sx={{ backgroundColor: "primary" }} position="static">
           <Toolbar sx={{ justifyContent: "space-between" }}>
             <IconButton href="/">
-              <Image src={logoSide} duration={0} width={250} />
+              <Image src={logoSide} duration={0} width={200} />
             </IconButton>
 
             {/* Small Menu */}

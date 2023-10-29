@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   createTheme,
+  Divider,
   Link,
   Menu,
   MenuItem,

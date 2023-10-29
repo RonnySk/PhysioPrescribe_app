@@ -53,7 +53,7 @@ function LandingPage() {
           variant="contained"
           href="/signup"
           size="small"
-          sx={{ p: 1.5, mb: 2, backgroundColor: "#009be5" }}
+          sx={{ p: 1.5, m: 3, backgroundColor: "#009be5" }}
         >
           Start your training now!
         </Button>
