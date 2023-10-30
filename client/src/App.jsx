@@ -10,8 +10,9 @@ import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
-import TrainingPlan from "./pages/CreateTrainingPlan";
-import ExercisesTrainingPlan from "./pages/ExercisesTrainingPlan";
+import CreateTrainingPlan from "./pages/CreateTrainingPlan";
+import AddExerciseTrainingPlan from "./pages/AddExerciseTrainingPlan";
+import TrainingPlan from "./pages/TrainingPlan";
 
 function App() {
   return (
@@ -57,15 +58,6 @@ function App() {
         />
 
         <Route
-          path="/exercisestrainingplan/:training_id"
-          element={
-            <IsPrivate>
-              <ExercisesTrainingPlan />
-            </IsPrivate>
-          }
-        />
-
-        <Route
           path="/patients"
           element={
             <IsPrivate>
@@ -73,11 +65,30 @@ function App() {
             </IsPrivate>
           }
         />
+
         <Route
-          path="/trainingplan"
+          path="/createtrainingplan"
+          element={
+            <IsPrivate>
+              <CreateTrainingPlan />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/trainingplan/:training_id"
           element={
             <IsPrivate>
               <TrainingPlan />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/addexercisetrainingplan/:training_id"
+          element={
+            <IsPrivate>
+              <AddExerciseTrainingPlan />
             </IsPrivate>
           }
         />

@@ -1,11 +1,9 @@
-import { Typography } from "@mui/material";
-import { Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import appService from "../services/app.service";
 import Exercises from "./Exercises";
 
-function ExercisesTrainingPlan() {
+function AddExerciseTrainingPlan() {
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -31,4 +29,4 @@ function ExercisesTrainingPlan() {
   );
 }
 
-export default ExercisesTrainingPlan;
+export default AddExerciseTrainingPlan;

@@ -64,7 +64,7 @@ function CreateTrainingPlan() {
       .then((response) => {
         const { newTrainingPlan } = response.data;
         console.log("response API", newTrainingPlan._id);
-        navigate(`/exercisestrainingplan/${newTrainingPlan._id}`);
+        navigate(`/trainingplan/${newTrainingPlan._id}`);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

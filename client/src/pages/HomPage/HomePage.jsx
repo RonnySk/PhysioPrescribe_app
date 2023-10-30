@@ -97,7 +97,7 @@ function HomePage() {
               Exercises
             </Link>
             <Link
-              href="/trainingplan"
+              href="/createtrainingplan"
               sx={{
                 backgroundColor: "white",
                 border: 1,
