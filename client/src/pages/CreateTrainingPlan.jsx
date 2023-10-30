@@ -13,21 +13,28 @@ import {
 import { Box } from "@mui/system";
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
 import { AuthContext } from "../context/auth.context";
 import appService from "../services/app.service";
 
 function CreateTrainingPlan() {
   const { user } = useContext(AuthContext);
+  const [therapeutId, setUserId] = useState(user._id);
   const [allPatients, setAllPatients] = useState([]);
+  const [patientName, setPatientName] = useState("");
+  const [patientId, setPatientId] = useState("");
+  const [trainingName, setTrainingName] = useState("");
+  const [trainingDescription, setTrainingDescription] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     appService
       .getAllPatients()
       .then((response) => {
         const { allPatients } = response.data;
-        console.log("resposta do API", allPatients);
+        console.log("all patients", allPatients);
         setAllPatients(allPatients);
       })
       .catch((error) => {
@@ -35,6 +42,35 @@ function CreateTrainingPlan() {
         setErrorMessage(errorDescription);
       });
   }, []);
+
+  const handlePatientId = (e) => {
+    setPatientId(e.target.value);
+    setPatientName(e.target.value);
+  };
+  const handleTrainingName = (e) => setTrainingName(e.target.value);
+  const handleTrainingDescription = (e) =>
+    setTrainingDescription(e.target.value);
+
+  const handleCreateTrainingPlan = () => {
+    const requestBody = {
+      therapeutId,
+      patientId,
+      trainingName,
+      trainingDescription,
+    };
+
+    appService
+      .createTrainingPlan(requestBody)
+      .then((response) => {
+        const { newTrainingPlan } = response.data;
+        console.log("response API", newTrainingPlan._id);
+        navigate(`/exercisestrainingplan/${newTrainingPlan._id}`);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
 
   let theme = createTheme({
     palette: {
@@ -103,14 +139,14 @@ function CreateTrainingPlan() {
                   id="outlined-basic"
                   label="Training name"
                   variant="outlined"
-                  // onChange={handleName}
+                  onChange={handleTrainingName}
                   sx={{ width: "100%" }}
                 />
                 <TextField
                   id="outlined-basic"
                   label="Description"
                   variant="outlined"
-                  // onChange={handleName}
+                  onChange={handleTrainingDescription}
                   sx={{ width: "100%" }}
                 />
 
@@ -120,16 +156,12 @@ function CreateTrainingPlan() {
                   </InputLabel>
                   <Select
                     id="demo-simple-select-label"
-                    value=""
+                    value={patientName}
                     label="Patients"
-                    // onChange={handlePhysiotherapist}
+                    onChange={handlePatientId}
                   >
                     {allPatients.map((patient) => (
-                      <MenuItem
-                        key={patient.name}
-                        value={patient.name}
-                        // style={getStyles(name, personName, theme)}
-                      >
+                      <MenuItem key={patient._id} value={patient._id}>
                         {patient.name}
                       </MenuItem>
                     ))}
@@ -145,7 +177,7 @@ function CreateTrainingPlan() {
                     },
                   }}
                   size="large"
-                  // onClick={handleSubmit}
+                  onClick={handleCreateTrainingPlan}
                 >
                   Create
                 </Button>

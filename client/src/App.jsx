@@ -11,6 +11,7 @@ import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
 import TrainingPlan from "./pages/CreateTrainingPlan";
+import ExercisesTrainingPlan from "./pages/ExercisesTrainingPlan";
 
 function App() {
   return (
@@ -51,6 +52,15 @@ function App() {
           element={
             <IsPrivate>
               <Exercises />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/exercisestrainingplan/:id"
+          element={
+            <IsPrivate>
+              <ExercisesTrainingPlan />
             </IsPrivate>
           }
         />

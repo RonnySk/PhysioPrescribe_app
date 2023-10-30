@@ -20,8 +20,8 @@ class AppService {
   }
 
   // POST /api/examples
-  createOne = async (requestBody) => {
-    return this.api.post("/api/examples", requestBody);
+  createTrainingPlan = async (requestBody) => {
+    return this.api.post("/api/createTrainingPlan", requestBody);
   };
 
   // GET /api/examples

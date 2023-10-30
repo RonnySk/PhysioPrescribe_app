@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const User = require("../models/User.model");
+const TrainingPlan = require("../models/TrainingPlan.models");
 const router = express.Router();
 
 // get all Patients Route
@@ -30,6 +31,25 @@ router.post("/exercisesApi", async (req, res, next) => {
       console.log("response from API", response.data);
       res.json(response.data);
     });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// create new Training Plan
+
+router.post("/createTrainingPlan", async (req, res, next) => {
+  try {
+    const { therapeutId, patientId, trainingName, trainingDescription } =
+      req.body;
+
+    const newTrainingPlan = await TrainingPlan.create({
+      therapeutId,
+      patientId,
+      trainingName,
+      trainingDescription,
+    });
+    res.status(201).json({ newTrainingPlan });
   } catch (err) {
     next(err);
   }

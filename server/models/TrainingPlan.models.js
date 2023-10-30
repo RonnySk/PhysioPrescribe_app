@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const trainingPlanSchema = new Schema(
   {
-    name: {
+    trainingName: {
       type: String,
       required: true,
-      unique: true,
+      //   unique: true,
     },
     description: {
       type: String,
@@ -13,7 +13,7 @@ const trainingPlanSchema = new Schema(
     patientId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: [true, "Name is required."],
+      required: true,
     },
     therapeutId: {
       type: Schema.Types.ObjectId,
