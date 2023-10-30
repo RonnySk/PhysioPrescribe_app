@@ -183,6 +183,11 @@ function CreateTrainingPlan() {
                 </Button>
               </Stack>
             </form>
+            {errorMessage && (
+              <Typography variant="p" color="#808080" mb={2}>
+                {errorMessage}
+              </Typography>
+            )}
           </Box>
         </Box>
       </Box>

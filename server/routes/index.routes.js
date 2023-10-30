@@ -43,6 +43,13 @@ router.post("/createTrainingPlan", async (req, res, next) => {
     const { therapeutId, patientId, trainingName, trainingDescription } =
       req.body;
 
+    if (trainingName === "" || patientId === "") {
+      res
+        .status(400)
+        .json({ message: "Provide Training Name and/or Patient." });
+      return;
+    }
+
     const newTrainingPlan = await TrainingPlan.create({
       therapeutId,
       patientId,
