@@ -9,7 +9,7 @@ router.get("/allPatients", async (req, res, next) => {
   try {
     const allPatients = await User.find({ isPhysiotherapist: "false" });
     console.log("all Patients", allPatients);
-    res.json({ allPatients });
+    res.status(201).json({ allPatients });
   } catch (err) {
     next(err);
   }
@@ -29,7 +29,7 @@ router.post("/exercisesApi", async (req, res, next) => {
 
     axios.get(url, config).then((response) => {
       console.log("response from API", response.data);
-      res.json(response.data);
+      res.status(201).json(response.data);
     });
   } catch (err) {
     next(err);
@@ -57,6 +57,21 @@ router.post("/createTrainingPlan", async (req, res, next) => {
       trainingDescription,
     });
     res.status(201).json({ newTrainingPlan });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// get One Training Plan Route
+router.get("/onetrainingplan/:training_id", async (req, res, next) => {
+  try {
+    const { training_id } = req.params;
+
+    const oneTrainingPlan = await TrainingPlan.findById(training_id).populate(
+      "patientId"
+    );
+    console.log("treino com populate", oneTrainingPlan);
+    res.status(201).json({ oneTrainingPlan });
   } catch (err) {
     next(err);
   }

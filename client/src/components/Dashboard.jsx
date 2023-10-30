@@ -124,7 +124,7 @@ function Dashboard() {
             fontSize="small"
           />
           <Link
-            href="/trainings"
+            href="/exercises"
             underline="none"
             color="#808080"
             sx={{

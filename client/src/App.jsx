@@ -57,7 +57,7 @@ function App() {
         />
 
         <Route
-          path="/exercisestrainingplan/:id"
+          path="/exercisestrainingplan/:training_id"
           element={
             <IsPrivate>
               <ExercisesTrainingPlan />

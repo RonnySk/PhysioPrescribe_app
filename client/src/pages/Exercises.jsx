@@ -2,7 +2,6 @@ import {
   Autocomplete,
   Button,
   createTheme,
-  Input,
   Stack,
   TextField,
   ThemeProvider,
@@ -12,10 +11,10 @@ import { Box } from "@mui/system";
 import React, { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
-import HourglassTopIcon from "@mui/icons-material/HourglassTop";
 import ExerciseCard from "../components/ExerciseCard";
 
-function Exercises() {
+function Exercises(props) {
+  const { oneTrainingPlan } = props;
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [muscle, setMuscle] = useState("");
@@ -23,16 +22,6 @@ function Exercises() {
   const [exercises, setExercises] = useState([]);
   const [exercisesNotFound, setExerciseNotFound] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  let theme = createTheme({
-    palette: {
-      primary: {
-        light: "#1976D2",
-        main: "#009be5",
-        dark: "#00008B",
-      },
-    },
-  });
 
   const handleName = (e) => setName(e.target.value);
   const handleType = (event, newInputValue) => setType(newInputValue);
@@ -57,16 +46,22 @@ function Exercises() {
         } else {
           setExercises(response.data);
         }
-        console.log("teste api", response.data);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
   };
-  console.log("os exercicios", exercises);
 
-  console.log("tipos", type, "name", name);
+  let theme = createTheme({
+    palette: {
+      primary: {
+        light: "#1976D2",
+        main: "#009be5",
+        dark: "#00008B",
+      },
+    },
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -82,13 +77,50 @@ function Exercises() {
           sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             alignItems: "center",
             width: "100vw",
             height: "100%",
-            mt: 5,
+            mt: 2,
           }}
         >
+          {Object.keys(oneTrainingPlan).length === 0 ? (
+            <Box>
+              <Typography>Loading...</Typography>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Stack mb={2}>
+                <Typography variant="p" fontSize={14} color="#808080">
+                  Training Plan: {oneTrainingPlan.trainingName}
+                </Typography>
+                <Typography variant="p" fontSize={14} color="#808080">
+                  Patient: {oneTrainingPlan.patientId.name}
+                </Typography>
+              </Stack>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  ml: 2,
+                  mr: 2,
+                  mb: 2,
+                  backgroundColor: "primary.main",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "primary.light",
+                  },
+                }}
+              >
+                Open Plan
+              </Button>
+            </Box>
+          )}
           <Box
             mb={4}
             sx={{

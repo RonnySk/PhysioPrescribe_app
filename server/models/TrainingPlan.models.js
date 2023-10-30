@@ -5,7 +5,6 @@ const trainingPlanSchema = new Schema(
     trainingName: {
       type: String,
       required: true,
-      //   unique: true,
     },
     description: {
       type: String,

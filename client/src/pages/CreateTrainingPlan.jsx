@@ -116,7 +116,7 @@ function CreateTrainingPlan() {
             }}
           >
             <Typography variant="h4" color="#808080" mt={2}>
-              Create a new Training Plan
+              Create new Training Plan
             </Typography>
             <form style={{ width: "100%" }}>
               <Stack

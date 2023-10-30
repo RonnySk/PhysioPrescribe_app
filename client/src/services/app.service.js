@@ -35,8 +35,8 @@ class AppService {
   };
 
   // GET /api/examples/:id
-  getOne = async (id) => {
-    return this.api.get(`/api/examples/${id}`);
+  getOneTrainingPlan = async (training_id) => {
+    return this.api.get(`/api/onetrainingplan/${training_id}`);
   };
 
   // PUT /api/examples/:id
