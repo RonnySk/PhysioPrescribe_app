@@ -151,7 +151,7 @@ function Dashboard() {
         >
           <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
           <Link
-            href="/trainings"
+            href="/trainingplan"
             underline="none"
             color="#808080"
             sx={{
@@ -260,7 +260,7 @@ function Dashboard() {
               sx={{ color: "primary.light", marginRight: 1 }}
               fontSize="small"
             />
-            <Link href="/trainingsPlan" underline="none" color="primary.light">
+            <Link href="//trainingplan" underline="none" color="primary.light">
               Trainings Plan
             </Link>
           </MenuItem>

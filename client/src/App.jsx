@@ -10,6 +10,7 @@ import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
+import TrainingPlan from "./pages/CreateTrainingPlan";
 
 function App() {
   return (
@@ -59,6 +60,14 @@ function App() {
           element={
             <IsPrivate>
               <Patients />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/trainingplan"
+          element={
+            <IsPrivate>
+              <TrainingPlan />
             </IsPrivate>
           }
         />
