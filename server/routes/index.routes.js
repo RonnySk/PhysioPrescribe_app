@@ -15,27 +15,26 @@ router.get("/allPatients", async (req, res, next) => {
   }
 });
 
-// // get exercises from Api Route
-// router.post("/exercisesApi", async (req, res, next) => {
-//   try {
-//     const { name, type, muscle, difficulty } = req.body;
-//     const config = {
-//       headers: {
-//         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//     };
+// get exercises from Api Route
+router.post("/exercisesApi", async (req, res, next) => {
+  try {
+    const { name, type, muscle, difficulty } = req.body;
+    const config = {
+      headers: {
+        "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+      },
+    };
 
-//     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+    const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
 
-//     axios.get(url, config).then((response) => {
-//       console.log("response from API", response.data);
-//       res.status(201).json(response.data);
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+    axios.get(url, config).then((response) => {
+      console.log("response from API", response.data);
+      res.status(201).json(response.data);
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 
 // create new Training Plan
 

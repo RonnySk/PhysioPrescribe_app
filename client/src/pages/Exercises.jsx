@@ -30,45 +30,18 @@ function Exercises(props) {
   const handlDifficulty = (event, newInputValue) =>
     setDifficulty(newInputValue);
 
-  // const handleSubmit = () => {
-  //   setExercises([]);
-  //   const requestBody = {
-  //     name,
-  //     type,
-  //     muscle,
-  //     difficulty,
-  //   };
-
-  //   appService
-  //     .getExercisesAPI(requestBody)
-  //     .then((response) => {
-  //       if (response.data.length === 0) {
-  //         setExerciseNotFound("No exercise found, search again!");
-  //       } else {
-  //         setExercises(response.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       const errorDescription = error.response.data.message;
-  //       setErrorMessage(errorDescription);
-  //     });
-  // };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const config = {
-      headers: {
-        "X-Api-Key": "Kp49p/WlYVEDj7PvUuMfzA==oLGVdjm3HJQql4SN",
-      },
+  const handleSubmit = () => {
+    setExercises([]);
+    const requestBody = {
+      name,
+      type,
+      muscle,
+      difficulty,
     };
 
-    const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
-
-    axios
-      .get(url, config)
+    appService
+      .getExercisesAPI(requestBody)
       .then((response) => {
-        console.log("resposta API", response.data);
         if (response.data.length === 0) {
           setExerciseNotFound("No exercise found, search again!");
         } else {
@@ -80,6 +53,33 @@ function Exercises(props) {
         setErrorMessage(errorDescription);
       });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const config = {
+  //     headers: {
+  //       "X-Api-Key": "Kp49p/WlYVEDj7PvUuMfzA==oLGVdjm3HJQql4SN",
+  //     },
+  //   };
+
+  //   const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+
+  //   axios
+  //     .get(url, config)
+  //     .then((response) => {
+  //       console.log("resposta API", response.data);
+  //       if (response.data.length === 0) {
+  //         setExerciseNotFound("No exercise found, search again!");
+  //       } else {
+  //         setExercises(response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       const errorDescription = error.response.data.message;
+  //       setErrorMessage(errorDescription);
+  //     });
+  // };
 
   let theme = createTheme({
     palette: {
