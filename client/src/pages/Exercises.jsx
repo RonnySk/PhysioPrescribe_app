@@ -59,7 +59,7 @@ function Exercises(props) {
 
     const config = {
       headers: {
-        "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+        "X-Api-Key": "Kp49p/WlYVEDj7PvUuMfzA==oLGVdjm3HJQql4SN",
       },
     };
 
@@ -68,6 +68,7 @@ function Exercises(props) {
     axios
       .get(url, config)
       .then((response) => {
+        console.log("resposta API", response.data);
         if (response.data.length === 0) {
           setExerciseNotFound("No exercise found, search again!");
         } else {
