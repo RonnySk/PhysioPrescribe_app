@@ -22,6 +22,7 @@ router.post("/exercisesApi", async (req, res, next) => {
     const config = {
       headers: {
         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
