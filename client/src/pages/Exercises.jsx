@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import ExerciseCard from "../components/ExerciseCard";
+import axios from "axios";
 
 function Exercises(props) {
   const { oneTrainingPlan } = props;
@@ -29,17 +30,43 @@ function Exercises(props) {
   const handlDifficulty = (event, newInputValue) =>
     setDifficulty(newInputValue);
 
-  const handleSubmit = () => {
-    setExercises([]);
-    const requestBody = {
-      name,
-      type,
-      muscle,
-      difficulty,
+  // const handleSubmit = () => {
+  //   setExercises([]);
+  //   const requestBody = {
+  //     name,
+  //     type,
+  //     muscle,
+  //     difficulty,
+  //   };
+
+  //   appService
+  //     .getExercisesAPI(requestBody)
+  //     .then((response) => {
+  //       if (response.data.length === 0) {
+  //         setExerciseNotFound("No exercise found, search again!");
+  //       } else {
+  //         setExercises(response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       const errorDescription = error.response.data.message;
+  //       setErrorMessage(errorDescription);
+  //     });
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+      },
     };
 
-    appService
-      .getExercisesAPI(requestBody)
+    const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+
+    axios
+      .get(url, config)
       .then((response) => {
         if (response.data.length === 0) {
           setExerciseNotFound("No exercise found, search again!");
