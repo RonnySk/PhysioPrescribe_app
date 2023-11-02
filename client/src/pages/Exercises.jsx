@@ -84,11 +84,7 @@ function Exercises(props) {
             mt: 2,
           }}
         >
-          {Object.keys(oneTrainingPlan).length === 0 ? (
-            <Box>
-              <Typography>Loading...</Typography>
-            </Box>
-          ) : (
+          {oneTrainingPlan !== undefined ? (
             <Box
               sx={{
                 display: "flex",
@@ -120,7 +116,7 @@ function Exercises(props) {
                 Open Plan
               </Button>
             </Box>
-          )}
+          ) : null}
           <Box
             mb={4}
             sx={{

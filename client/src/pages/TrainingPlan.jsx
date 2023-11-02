@@ -25,6 +25,7 @@ function TrainingPlan() {
       });
   }, []);
 
+  console.log("log fora", oneTrainingPlan);
   let theme = createTheme({
     palette: {
       primary: {
