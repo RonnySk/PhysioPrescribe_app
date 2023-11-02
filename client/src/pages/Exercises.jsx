@@ -40,7 +40,7 @@ function Exercises(props) {
     };
 
     appService
-      .getExercisesAPI(requestBody)
+      .ExercisesAPI(requestBody)
       .then((response) => {
         if (response.data.length === 0) {
           setExerciseNotFound("No exercise found, search again!");

@@ -29,8 +29,8 @@ class AppService {
     return this.api.get("/api/allPatients");
   };
 
-  // GET /api/examples
-  getExercisesAPI = async (requestBody) => {
+  // POST /api/examples
+  ExercisesAPI = async (requestBody) => {
     return this.api.post("/api/exercisesApi", requestBody);
   };
 
