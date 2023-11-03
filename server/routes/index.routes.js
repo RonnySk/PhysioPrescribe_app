@@ -16,6 +16,25 @@ router.get("/allPatients", async (req, res, next) => {
 });
 
 // get exercises from Api Route
+// router.post("/exercisesApi", async (req, res, next) => {
+//   try {
+//     const { name, type, muscle, difficulty } = req.body;
+//     const config = {
+//       headers: {
+//         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+//       },
+//     };
+
+//     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+
+//     axios.get(url, config).then((response) => {
+//       res.status(201).json(response.data);
+//     });
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.post("/exercisesApi", async (req, res, next) => {
   try {
     const { name, type, muscle, difficulty } = req.body;
@@ -27,9 +46,10 @@ router.post("/exercisesApi", async (req, res, next) => {
 
     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
 
-    axios.get(url, config).then((response) => {
-      res.status(201).json(response.data);
-    });
+    const ExercisesFromAPI = await axios.get(url, config);
+
+    console.log("Response from API on Backend", ExercisesFromAPI.data);
+    res.status(201).json(ExercisesFromAPI.data);
   } catch (err) {
     next(err);
   }
