@@ -2,15 +2,16 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme, Typography, Button } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import Exercises from "./Exercises";
 
-function TrainingPlan() {
+function OneTrainingPlan() {
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     appService
@@ -24,6 +25,19 @@ function TrainingPlan() {
         setErrorMessage(errorDescription);
       });
   }, []);
+
+  const handleDelete = () => {
+    appService
+      .deleteOneTrainingPlan(training_id)
+      .then((response) => {
+        alert("Training Plan removed successfully!");
+        navigate("/trainingplans");
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
 
   console.log("log fora", oneTrainingPlan);
   let theme = createTheme({
@@ -113,6 +127,7 @@ function TrainingPlan() {
                   <Button
                     variant="contained"
                     size="small"
+                    onClick={handleDelete}
                     sx={{
                       mb: 2,
                       backgroundColor: "primary.main",
@@ -134,4 +149,4 @@ function TrainingPlan() {
   );
 }
 
-export default TrainingPlan;
+export default OneTrainingPlan;

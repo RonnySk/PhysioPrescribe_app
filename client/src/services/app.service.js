@@ -19,22 +19,27 @@ class AppService {
     });
   }
 
-  // POST /api/examples
+  // POST Create Training Plan
   createTrainingPlan = async (requestBody) => {
     return this.api.post("/api/createTrainingPlan", requestBody);
   };
 
-  // GET /api/examples
+  // GET All Patients
   getAllPatients = async () => {
     return this.api.get("/api/allPatients");
   };
 
-  // POST /api/examples
+  // POST Exercises
   ExercisesAPI = async (requestBody) => {
     return this.api.post("/api/exercisesApi", requestBody);
   };
 
-  // GET /api/examples/:id
+  // GET All Training Plans
+  getAllTrainingPlans = async () => {
+    return this.api.get("/api/trainingplans");
+  };
+
+  // GET One Training Plan
   getOneTrainingPlan = async (training_id) => {
     return this.api.get(`/api/onetrainingplan/${training_id}`);
   };
@@ -44,9 +49,9 @@ class AppService {
     return this.api.put(`/api/examples/${id}`, requestBody);
   };
 
-  // DELETE /api/examples/:id
-  deleteProject = async (id) => {
-    return this.api.delete(`/api/examples/${id}`);
+  // DELETE One Training Plan
+  deleteOneTrainingPlan = async (training_id) => {
+    return this.api.delete(`/api/onetrainingplan/${training_id}`);
   };
 }
 

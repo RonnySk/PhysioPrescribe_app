@@ -12,7 +12,8 @@ import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
 import CreateTrainingPlan from "./pages/CreateTrainingPlan";
 import AddExerciseTrainingPlan from "./pages/AddExerciseTrainingPlan";
-import TrainingPlan from "./pages/TrainingPlan";
+import OneTrainingPlan from "./pages/OneTrainingPlan";
+import AllTrainingPlans from "./pages/AllTrainingPlans";
 
 function App() {
   return (
@@ -67,6 +68,15 @@ function App() {
         />
 
         <Route
+          path="/trainingplans"
+          element={
+            <IsPrivate>
+              <AllTrainingPlans />
+            </IsPrivate>
+          }
+        />
+
+        <Route
           path="/createtrainingplan"
           element={
             <IsPrivate>
@@ -79,7 +89,7 @@ function App() {
           path="/trainingplan/:training_id"
           element={
             <IsPrivate>
-              <TrainingPlan />
+              <OneTrainingPlan />
             </IsPrivate>
           }
         />

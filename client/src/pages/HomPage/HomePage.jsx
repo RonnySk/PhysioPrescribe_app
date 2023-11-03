@@ -57,7 +57,7 @@ function HomePage() {
           height: "100vh",
         }}
       >
-        <Typography color="primary.dark" sx={{ m: 7 }}>
+        <Typography variant="h4" color="#808080" m={7}>
           WELCOME {user.name.toUpperCase()}
         </Typography>
 
@@ -80,7 +80,7 @@ function HomePage() {
               }}
               underline="none"
             >
-              Patient
+              Patients
             </Link>
             <Link
               href="/exercises"
@@ -97,7 +97,7 @@ function HomePage() {
               Exercises
             </Link>
             <Link
-              href="/createtrainingplan"
+              href="/trainingplans"
               sx={{
                 backgroundColor: "white",
                 border: 1,
@@ -108,7 +108,7 @@ function HomePage() {
               }}
               underline="none"
             >
-              New training Plan
+              Training Plans
             </Link>
           </Stack>
         )}

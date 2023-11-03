@@ -15,26 +15,7 @@ router.get("/allPatients", async (req, res, next) => {
   }
 });
 
-// get exercises from Api Route
-// router.post("/exercisesApi", async (req, res, next) => {
-//   try {
-//     const { name, type, muscle, difficulty } = req.body;
-//     const config = {
-//       headers: {
-//         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
-//       },
-//     };
-
-//     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
-
-//     axios.get(url, config).then((response) => {
-//       res.status(201).json(response.data);
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
+// Route Exercises
 router.post("/exercisesApi", async (req, res, next) => {
   try {
     const { name, type, muscle, difficulty } = req.body;
@@ -55,8 +36,17 @@ router.post("/exercisesApi", async (req, res, next) => {
   }
 });
 
-// create new Training Plan
+//get all Training PLans
+router.get("/trainingplans", async (req, res, next) => {
+  try {
+    const allTrainingPlans = await TrainingPlan.find().populate("patientId");
+    res.status(201).json({ allTrainingPlans });
+  } catch (err) {
+    next(err);
+  }
+});
 
+// create new Training Plan
 router.post("/createTrainingPlan", async (req, res, next) => {
   try {
     const { therapeutId, patientId, trainingName, trainingDescription } =
@@ -91,6 +81,20 @@ router.get("/onetrainingplan/:training_id", async (req, res, next) => {
     );
     console.log("treino com populate", oneTrainingPlan);
     res.status(201).json({ oneTrainingPlan });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Delete One Training Plan Route
+router.delete("/onetrainingplan/:training_id", async (req, res, next) => {
+  try {
+    const { training_id } = req.params;
+
+    const deleteTrainingPlan = await TrainingPlan.findByIdAndRemove(
+      training_id
+    );
+    res.status(201).json({ message: "Training plan successfully removed" });
   } catch (err) {
     next(err);
   }

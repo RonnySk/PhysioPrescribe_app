@@ -67,7 +67,7 @@ function Dashboard() {
         >
           <HomeIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
           <Link
-            href="Home"
+            href="/home"
             underline="none"
             color="#808080"
             sx={{
@@ -151,7 +151,7 @@ function Dashboard() {
         >
           <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
           <Link
-            href="/trainingplan"
+            href="/trainingplans"
             underline="none"
             color="#808080"
             sx={{
@@ -159,7 +159,7 @@ function Dashboard() {
               ml: 2,
             }}
           >
-            Trainings Plan
+            Training Plans
           </Link>
         </Box>
         <Box
@@ -180,7 +180,7 @@ function Dashboard() {
         >
           <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
           <Link
-            href="/trainings"
+            // href="/settings"
             underline="none"
             color="#808080"
             sx={{
