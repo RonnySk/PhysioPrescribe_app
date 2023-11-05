@@ -104,38 +104,74 @@ function AllTrainingPlans() {
               width: { xs: "90%", sm: "90%", md: "80%" },
             }}
           >
-            <Typography variant="h4" color="#808080" m={2}>
+            <Typography variant="h4" color="#808080" mt={3}>
               Training Plans
             </Typography>
-            <TextField
-              id="outlined-basic"
-              label="Patient name"
-              variant="outlined"
-              onChange={handleSearchInput}
-              sx={{ width: "100%" }}
-            ></TextField>
-            <IconButton
-              type="button"
-              onClick={handleSearchSubmit}
-              sx={{ p: "10px" }}
-              aria-label="search"
-            >
-              <SearchIcon />
-            </IconButton>
-            <Button
-              variant="contained"
-              size="small"
+            <Box
               sx={{
-                backgroundColor: "primary.main",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "primary.light",
-                },
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                justifyContent: "center",
+                alignItems: "center",
+                m: 2,
               }}
-              onClick={() => setfilteredTrainingPlans([])}
             >
-              All Training Plans
-            </Button>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "primary.main",
+                  m: 2,
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "primary.light",
+                  },
+                }}
+                onClick={() => setfilteredTrainingPlans([])}
+              >
+                All Training Plans
+              </Button>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  backgroundColor: "primary.main",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "primary.light",
+                  },
+                }}
+                href={"/createtrainingplan"}
+              >
+                Create new Training Plan
+              </Button>
+            </Box>
+
+            <Box
+              sx={{
+                display: { xs: "block", sm: "flex", md: "flex", lg: "flex" },
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                mb: 2,
+              }}
+            >
+              <TextField
+                id="outlined-basic"
+                label="Patient name"
+                variant="outlined"
+                onChange={handleSearchInput}
+                sx={{ width: { xs: "60%", sm: "30%" } }}
+              ></TextField>
+              <IconButton
+                type="button"
+                onClick={handleSearchSubmit}
+                sx={{ p: "10px" }}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </Box>
 
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: "70%" }}>
