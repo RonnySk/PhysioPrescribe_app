@@ -3,7 +3,18 @@ import {
   Button,
   createTheme,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   TextField,
   ThemeProvider,
   Typography,
@@ -13,6 +24,8 @@ import Dashboard from "../components/Dashboard";
 import Loading from "../components/Loading/Loading";
 import appService from "../services/app.service";
 import SearchIcon from "@mui/icons-material/Search";
+import FolderIcon from "@mui/icons-material/Folder";
+import Paper from "@mui/material/Paper";
 
 function AllTrainingPlans() {
   const [allTrainingPlans, setAllTrainingPlans] = useState([]);
@@ -25,7 +38,6 @@ function AllTrainingPlans() {
       .getAllTrainingPlans()
       .then((response) => {
         const { allTrainingPlans } = response.data;
-        // console.log("all training from DB", allTrainingPlans);
         setAllTrainingPlans(allTrainingPlans);
       })
       .catch((error) => {
@@ -40,16 +52,6 @@ function AllTrainingPlans() {
   };
 
   const handleSearchSubmit = () => {
-    // // const requestBody = { a };
-    // appService
-    //   .getSearchedPatientsTraining(searchInput)
-    //   .then((response) => {
-    //     console.log("response from search", response.data);
-    //   })
-    //   .catch((error) => {
-    //     const errorDescription = error.response.data.message;
-    //     setErrorMessage(errorDescription);
-    //   });
     const filteredTrainings = allTrainingPlans.filter((oneTraining) => {
       if (searchInput === "") {
         return oneTraining;
@@ -134,81 +136,59 @@ function AllTrainingPlans() {
             >
               All Training Plans
             </Button>
-            <Stack
-              direction="row"
-              justifyContent="flex-start"
-              color="white"
-              spacing="18%"
-              pl="6%"
-              sx={{ backgroundColor: "primary.main" }}
-            >
-              <Typography>Patient</Typography>
-              <Typography>Plan</Typography>
-            </Stack>
 
-            {filteredTrainingPlans.length === 0
-              ? allTrainingPlans.map((oneTrainingPlan) => (
-                  <>
-                    <Stack
-                      justifyContent="space-around"
-                      alignItems="center"
-                      direction="row"
-                      spacing={1}
-                      p={1}
-                      borderTop={1}
-                      ml={4}
-                      mr={4}
-                    >
-                      <Typography>{oneTrainingPlan.patientId.name}</Typography>
-                      <Typography>{oneTrainingPlan.trainingName}</Typography>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        sx={{
-                          backgroundColor: "primary.main",
-                          color: "white",
-                          "&:hover": {
-                            backgroundColor: "primary.light",
-                          },
-                        }}
-                        href={`/trainingplan/${oneTrainingPlan._id}`}
-                      >
-                        Open
-                      </Button>
-                    </Stack>
-                  </>
-                ))
-              : filteredTrainingPlans.map((oneTrainingPlan) => (
-                  <>
-                    <Stack
-                      justifyContent="space-around"
-                      alignItems="center"
-                      direction="row"
-                      spacing={1}
-                      p={1}
-                      borderTop={1}
-                      ml={4}
-                      mr={4}
-                    >
-                      <Typography>{oneTrainingPlan.patientId.name}</Typography>
-                      <Typography>{oneTrainingPlan.trainingName}</Typography>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        sx={{
-                          backgroundColor: "primary.main",
-                          color: "white",
-                          "&:hover": {
-                            backgroundColor: "primary.light",
-                          },
-                        }}
-                        href={`/trainingplan/${oneTrainingPlan._id}`}
-                      >
-                        Open
-                      </Button>
-                    </Stack>
-                  </>
-                ))}
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: "70%" }}>
+                <TableHead>
+                  <TableRow
+                    sx={{ backgroundColor: "primary.main", color: "#000000" }}
+                  >
+                    <TableCell sx={{ color: "white" }}>Patient</TableCell>
+                    <TableCell sx={{ color: "white" }} align="center">
+                      Training Name
+                    </TableCell>
+                    <TableCell align="center"></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {filteredTrainingPlans.length === 0
+                    ? allTrainingPlans.map((oneTrainingPlan) => (
+                        <TableRow key={oneTrainingPlan._id}>
+                          <TableCell component="th" scope="row">
+                            {oneTrainingPlan.patientId.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {oneTrainingPlan.trainingName}
+                          </TableCell>
+                          <TableCell>
+                            <IconButton
+                              href={`/trainingplan/${oneTrainingPlan._id}`}
+                            >
+                              <FolderIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    : filteredTrainingPlans.map((oneTrainingPlan) => (
+                        <TableRow key={oneTrainingPlan._id}>
+                          <TableCell component="th" scope="row">
+                            {oneTrainingPlan.patientId.name}
+                          </TableCell>
+                          <TableCell align="center">
+                            {oneTrainingPlan.trainingName}
+                          </TableCell>
+                          <TableCell>
+                            <IconButton
+                              href={`/trainingplan/${oneTrainingPlan._id}`}
+                            >
+                              <FolderIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </Box>
         </Box>
       </Box>
