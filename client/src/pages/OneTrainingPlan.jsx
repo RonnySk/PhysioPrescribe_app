@@ -4,6 +4,7 @@ import { Box, Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
+import Loading from "../components/Loading/Loading";
 import appService from "../services/app.service";
 import Exercises from "./Exercises";
 
@@ -67,8 +68,8 @@ function OneTrainingPlan() {
             justifyContent: "center",
             alignItems: "center",
             width: "100vw",
-            height: "100%",
-            mt: 2,
+
+            mt: 1,
           }}
         >
           <Box
@@ -89,7 +90,7 @@ function OneTrainingPlan() {
 
             {Object.keys(oneTrainingPlan).length === 0 ? (
               <Box>
-                <Typography>Loading...</Typography>
+                <Loading />
               </Box>
             ) : (
               <>

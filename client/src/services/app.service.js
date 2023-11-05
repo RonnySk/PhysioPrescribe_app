@@ -29,6 +29,11 @@ class AppService {
     return this.api.get("/api/allPatients");
   };
 
+  // GET Seacherd Patients Training
+  getSearchedPatientsTraining = async (searchInfo) => {
+    return this.api.get("/api/searchedtraining", searchInfo);
+  };
+
   // POST Exercises
   ExercisesAPI = async (requestBody) => {
     return this.api.post("/api/exercisesApi", requestBody);

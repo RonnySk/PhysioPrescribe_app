@@ -117,7 +117,7 @@ function LoginPage() {
             sx={{ width: "80%" }}
           />
           {errorMessage && (
-            <Typography variant="p" color="#808080">
+            <Typography variant="p" color="#FF0000">
               {errorMessage}
             </Typography>
           )}

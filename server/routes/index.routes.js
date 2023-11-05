@@ -46,6 +46,23 @@ router.get("/trainingplans", async (req, res, next) => {
   }
 });
 
+// Search Patient and Training Plan
+
+router.get("/searchedtraining", async (req, res, next) => {
+  try {
+    const { searchInfo } = req.body;
+
+    // const searchedTrainingPlans = await TrainingPlan.find({
+    //   trainingName: searchInfo,
+    // });
+
+    console.log("req", req.body);
+    // res.status(201).json({ allTrainingPlans });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // create new Training Plan
 router.post("/createTrainingPlan", async (req, res, next) => {
   try {

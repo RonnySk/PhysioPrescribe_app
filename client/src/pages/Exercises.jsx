@@ -81,8 +81,7 @@ function Exercises(props) {
             justifyContent: "center",
             alignItems: "center",
             width: "100vw",
-            height: "100%",
-            mt: 2,
+            mt: 5,
           }}
         >
           {oneTrainingPlan !== undefined ? (
@@ -229,7 +228,7 @@ function Exercises(props) {
             </form>
 
             {exercises.length === 0 ? (
-              <Typography fontSize={18} m={3} color="#808080">
+              <Typography fontSize={18} m={3} color="#FF0000">
                 {exercisesNotFound}
               </Typography>
             ) : (
