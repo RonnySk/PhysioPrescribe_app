@@ -40,7 +40,7 @@ function OneTrainingPlan() {
       });
   };
 
-  console.log("log fora", oneTrainingPlan);
+  console.log("training ID", training_id);
   let theme = createTheme({
     palette: {
       primary: {
@@ -111,6 +111,7 @@ function OneTrainingPlan() {
                   }}
                 >
                   <Button
+                    href={`/addexercises/${training_id}`}
                     variant="contained"
                     size="small"
                     sx={{

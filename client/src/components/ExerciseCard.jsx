@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
 
-function ExerciseCard({ oneExercise }) {
-  console.log("teste do card", oneExercise);
+function ExerciseCard({ oneExercise, exerciseId }) {
+  console.log("teste do card", oneExercise, exerciseId);
   return (
     <React.Fragment>
       <Stack
@@ -29,6 +29,23 @@ function ExerciseCard({ oneExercise }) {
         <Typography variant="p" color="#808080">
           {oneExercise.instructions}
         </Typography>
+        {exerciseId.length !== 0 && (
+          <Button
+            variant="contained"
+            size="small"
+            sx={{
+              mr: 2,
+              mb: 2,
+              backgroundColor: "primary.main",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "primary.light",
+              },
+            }}
+          >
+            Add exercise
+          </Button>
+        )}
       </Stack>
     </React.Fragment>
   );

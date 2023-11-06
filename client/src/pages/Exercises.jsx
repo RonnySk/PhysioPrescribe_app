@@ -8,14 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import ExerciseCard from "../components/ExerciseCard";
-import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Exercises(props) {
-  const { oneTrainingPlan } = props;
+  // const { oneTrainingPlan } = props;
+  const { training_id } = useParams();
+  const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [muscle, setMuscle] = useState("");
@@ -23,6 +25,24 @@ function Exercises(props) {
   const [exercises, setExercises] = useState([]);
   const [exercisesNotFound, setExerciseNotFound] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+
+  console.log("id do TP no Params", training_id);
+
+  useEffect(() => {
+    if (training_id !== undefined) {
+      appService
+        .getOneTrainingPlan(training_id)
+        .then((response) => {
+          const { oneTrainingPlan } = response.data;
+          console.log("resposta do treino", oneTrainingPlan);
+          setOneTrainingPlan(oneTrainingPlan);
+        })
+        .catch((error) => {
+          const errorDescription = error.response.data.message;
+          setErrorMessage(errorDescription);
+        });
+    }
+  }, []);
 
   const handleName = (e) => setName(e.target.value);
   const handleType = (event, newInputValue) => setType(newInputValue);
@@ -84,7 +104,7 @@ function Exercises(props) {
             mt: 5,
           }}
         >
-          {oneTrainingPlan !== undefined ? (
+          {Object.keys(oneTrainingPlan).length !== 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -226,14 +246,17 @@ function Exercises(props) {
                 Search
               </Button>
             </form>
-
             {exercises.length === 0 ? (
               <Typography fontSize={18} m={3} color="#FF0000">
                 {exercisesNotFound}
               </Typography>
             ) : (
-              exercises.map((exercise) => (
-                <ExerciseCard oneExercise={exercise} />
+              exercises.map((exercise, index) => (
+                <ExerciseCard
+                  key={index}
+                  oneExercise={exercise}
+                  exerciseId={index}
+                />
               ))
             )}
           </Box>

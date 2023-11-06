@@ -59,6 +59,15 @@ function App() {
         />
 
         <Route
+          path="/addexercises/:training_id"
+          element={
+            <IsPrivate>
+              <Exercises />
+            </IsPrivate>
+          }
+        />
+
+        <Route
           path="/patients"
           element={
             <IsPrivate>
@@ -90,15 +99,6 @@ function App() {
           element={
             <IsPrivate>
               <OneTrainingPlan />
-            </IsPrivate>
-          }
-        />
-
-        <Route
-          path="/addexercisetrainingplan/:training_id"
-          element={
-            <IsPrivate>
-              <AddExerciseTrainingPlan />
             </IsPrivate>
           }
         />
