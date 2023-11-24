@@ -29,8 +29,35 @@ router.post("/exercisesApi", async (req, res, next) => {
 
     const ExercisesFromAPI = await axios.get(url, config);
 
-    console.log("Response from API on Backend", ExercisesFromAPI.data);
-    res.status(201).json(ExercisesFromAPI.data);
+    const exerciseWithIds = ExercisesFromAPI.data.map((exercise) => ({
+      id: exercise.name.split(" ").join("_"),
+      ...exercise,
+    }));
+
+    res.status(201).json(exerciseWithIds);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Add Exercise to Training Plan Route
+
+router.post("/addExerciseTp", async (req, res, next) => {
+  try {
+    // const oneTrainingPlan = await TrainingPlan.find({ isPhysiotherapist: "false" });
+    const { training_id, oneExercise } = req.body;
+
+    const findandUpdateTrainingPlan = await TrainingPlan.findByIdAndUpdate(
+      training_id,
+      {
+        $push: { exercisesId: oneExercise.id },
+      },
+      {
+        new: true,
+      }
+    );
+
+    res.status(201).json({ message: "Exercise successfully added!" });
   } catch (err) {
     next(err);
   }

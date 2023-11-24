@@ -1,9 +1,26 @@
 import { Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import appService from "../services/app.service";
 
-function ExerciseCard({ oneExercise, exerciseId }) {
-  console.log("teste do card", oneExercise, exerciseId);
+function ExerciseCard({ oneExercise, training_id }) {
+  console.log("teste do card", oneExercise, training_id);
+
+  const handleSubmit = () => {
+    const requestBody = { training_id, oneExercise };
+
+    appService
+      .addExercisesTrainingPlan(requestBody)
+      .then((response) => {
+        const { message } = response.data;
+        alert(message);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        // setErrorMessage(errorDescription);
+      });
+  };
+
   return (
     <React.Fragment>
       <Stack
@@ -29,7 +46,7 @@ function ExerciseCard({ oneExercise, exerciseId }) {
         <Typography variant="p" color="#808080">
           {oneExercise.instructions}
         </Typography>
-        {exerciseId.length !== 0 && (
+        {training_id && (
           <Button
             variant="contained"
             size="small"
@@ -42,6 +59,7 @@ function ExerciseCard({ oneExercise, exerciseId }) {
                 backgroundColor: "primary.light",
               },
             }}
+            onClick={handleSubmit}
           >
             Add exercise
           </Button>

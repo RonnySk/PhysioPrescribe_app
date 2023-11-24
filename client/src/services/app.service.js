@@ -50,8 +50,8 @@ class AppService {
   };
 
   // PUT /api/examples/:id
-  updateOne = async (id, requestBody) => {
-    return this.api.put(`/api/examples/${id}`, requestBody);
+  addExercisesTrainingPlan = async (requestBody) => {
+    return this.api.post("/api/addExerciseTp", requestBody);
   };
 
   // DELETE One Training Plan

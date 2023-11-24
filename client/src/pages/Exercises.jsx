@@ -253,9 +253,9 @@ function Exercises(props) {
             ) : (
               exercises.map((exercise, index) => (
                 <ExerciseCard
-                  key={index}
+                  key={exercise.id}
+                  training_id={training_id}
                   oneExercise={exercise}
-                  exerciseId={index}
                 />
               ))
             )}

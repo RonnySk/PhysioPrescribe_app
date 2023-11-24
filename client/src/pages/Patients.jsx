@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import HourglassTopIcon from "@mui/icons-material/HourglassTop";
-import { Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
 function Patients() {
   const [allPatients, setAllPatients] = useState([]);
@@ -62,7 +62,12 @@ function Patients() {
             </Typography>
           </Box>
         ) : (
-          allPatients.map((patient) => <Typography>{patient.name}</Typography>)
+          allPatients.map((patient) => (
+            <Box>
+              <Typography>{patient.name}</Typography>
+              <Divider />
+            </Box>
+          ))
         )}
       </Box>
     </Box>

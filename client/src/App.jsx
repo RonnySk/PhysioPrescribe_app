@@ -11,7 +11,7 @@ import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
 import CreateTrainingPlan from "./pages/CreateTrainingPlan";
-import AddExerciseTrainingPlan from "./pages/AddExerciseTrainingPlan";
+// import AddExerciseTrainingPlan from "./pages/AddExerciseTrainingPlan";
 import OneTrainingPlan from "./pages/OneTrainingPlan";
 import AllTrainingPlans from "./pages/AllTrainingPlans";
 
