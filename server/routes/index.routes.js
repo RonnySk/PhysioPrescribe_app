@@ -149,7 +149,7 @@ router.get("/onetrainingplan/:training_id", async (req, res, next) => {
   }
 });
 
-// Delete One Training Plan Route
+// Delete One Training Plan Routee
 router.delete("/onetrainingplan/:training_id", async (req, res, next) => {
   try {
     const { training_id } = req.params;
