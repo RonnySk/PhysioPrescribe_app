@@ -11,6 +11,7 @@ import Exercises from "./Exercises";
 function OneTrainingPlan() {
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
+  const [trainingPlanExercises, setTrainingPlanExercises] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
@@ -18,8 +19,9 @@ function OneTrainingPlan() {
     appService
       .getOneTrainingPlan(training_id)
       .then((response) => {
-        const { oneTrainingPlan } = response.data;
-        setOneTrainingPlan(oneTrainingPlan);
+        // const { oneTrainingPlan } = response.data;
+        console.log("response from execises", response.data);
+        // setOneTrainingPlan(oneTrainingPlan);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

@@ -44,7 +44,6 @@ router.post("/exercisesApi", async (req, res, next) => {
 
 router.post("/addExerciseTp", async (req, res, next) => {
   try {
-    // const oneTrainingPlan = await TrainingPlan.find({ isPhysiotherapist: "false" });
     const { training_id, oneExercise } = req.body;
 
     const findandUpdateTrainingPlan = await TrainingPlan.findByIdAndUpdate(
@@ -123,8 +122,28 @@ router.get("/onetrainingplan/:training_id", async (req, res, next) => {
     const oneTrainingPlan = await TrainingPlan.findById(training_id).populate(
       "patientId"
     );
-    console.log("treino com populate", oneTrainingPlan);
-    res.status(201).json({ oneTrainingPlan });
+
+    const exercisesOnTP = await Promise.all(
+      oneTrainingPlan.exercisesId.map(async (exercise) => {
+        const exerciseName = exercise.split("_").join(" ");
+
+        const config = {
+          headers: {
+            "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+          },
+        };
+
+        const url = `https://api.api-ninjas.com/v1/exercises?name=${exerciseName}`;
+
+        const findExerciseApi = await axios.get(url, config);
+
+        return findExerciseApi.data;
+      })
+    );
+
+    console.log("treino com populate", exercisesOnTP);
+    // res.status(201).json({ oneTrainingPlan});
+    res.status(201).json({ exercisesOnTP });
   } catch (err) {
     next(err);
   }
