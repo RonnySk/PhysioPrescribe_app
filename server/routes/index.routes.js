@@ -48,7 +48,7 @@ router.post("/exercisesApi", async (req, res, next) => {
     const config = {
       params: { limit: "10" },
       headers: {
-        "X-RapidAPI-Key": "c94219b3f1msh987d1bb4bab928bp1c4486jsna82aebf9e872",
+        "X-RapidAPI-Key": process.env.RAPID_API_KEY,
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
