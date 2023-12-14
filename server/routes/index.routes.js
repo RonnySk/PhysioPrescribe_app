@@ -44,7 +44,6 @@ router.get("/allPatients", async (req, res, next) => {
 
 router.post("/exercisesApi", async (req, res, next) => {
   try {
-    // const { name, type, muscle, difficulty } = req.body;
     const config = {
       params: { limit: "10" },
       headers: {

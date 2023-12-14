@@ -270,19 +270,6 @@ function Exercises(props) {
                 Search
               </Button>
             </form>
-            {/* {exercises.length === 0 ? (
-              <Typography fontSize={18} m={3} color="#FF0000">
-                {exercisesNotFound}
-              </Typography>
-            ) : (
-              exercises.map((exercise, index) => (
-                <ExerciseCard
-                  key={exercise.id}
-                  training_id={training_id}
-                  oneExercise={exercise}
-                />
-              ))
-            )} */}
 
             {filteredExercises.length === 0
               ? exercises.map((exercise, index) => (
