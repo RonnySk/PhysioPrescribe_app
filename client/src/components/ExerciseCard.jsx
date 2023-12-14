@@ -4,7 +4,7 @@ import React from "react";
 import appService from "../services/app.service";
 
 function ExerciseCard({ oneExercise, training_id }) {
-  console.log("teste do card", oneExercise, training_id);
+  // console.log("teste do card", oneExercise, training_id);
 
   const handleSubmit = () => {
     const requestBody = { training_id, oneExercise };
@@ -38,10 +38,7 @@ function ExerciseCard({ oneExercise, training_id }) {
           Equipment: {oneExercise.equipment}
         </Typography>
         <Typography variant="p" color="#808080">
-          Difficulty: {oneExercise.difficulty}
-        </Typography>{" "}
-        <Typography variant="p" color="#808080">
-          Type: {oneExercise.type}
+          Body Part: {oneExercise.bodyPart}
         </Typography>
         <Typography variant="p" color="#808080">
           {oneExercise.instructions}

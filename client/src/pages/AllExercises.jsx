@@ -18,10 +18,10 @@ function Exercises(props) {
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [name, setName] = useState("");
-  const [bodyPart, setBodyPart] = useState("");
-  const [equipment, setEquipment] = useState("");
+  const [type, setType] = useState("");
+  const [muscle, setMuscle] = useState("");
+  const [difficulty, setDifficulty] = useState("");
   const [exercises, setExercises] = useState([]);
-  const [filteredExercises, setFilteredExercises] = useState([]);
   const [exercisesNotFound, setExerciseNotFound] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -29,6 +29,7 @@ function Exercises(props) {
 
   useEffect(() => {
     setExercises([]);
+
     if (training_id !== undefined) {
       appService
         .getOneTrainingPlan(training_id)
@@ -42,12 +43,11 @@ function Exercises(props) {
           setErrorMessage(errorDescription);
         });
     }
-
     appService
       .ExercisesAPI()
       .then((response) => {
         if (response.data.length === 0) {
-          setExerciseNotFound("Loading exercises...");
+          setExerciseNotFound("No exercise found, search again!");
         } else {
           setExercises(response.data);
           console.log("exercise from Api", response.data);
@@ -60,25 +60,12 @@ function Exercises(props) {
   }, []);
 
   const handleName = (e) => setName(e.target.value);
-  const handleBodyPart = (event, newInputValue) => setBodyPart(newInputValue);
+  const handleType = (event, newInputValue) => setType(newInputValue);
+  const handleMuscle = (event, newInputValue) => setMuscle(newInputValue);
+  const handlDifficulty = (event, newInputValue) =>
+    setDifficulty(newInputValue);
 
-  const handleEquipment = (event, newInputValue) => setEquipment(newInputValue);
-
-  const handleSubmit = () => {
-    let ArrFilteredExercises = [];
-
-    exercises.filter((oneExercise) => {
-      let filteredEquipment = Object.values(oneExercise).includes(
-        equipment || bodyPart || name
-      );
-
-      if (filteredEquipment) {
-        return ArrFilteredExercises.push(oneExercise);
-      }
-
-      setFilteredExercises(ArrFilteredExercises);
-    });
-  };
+  const handleSubmit = () => {};
 
   let theme = createTheme({
     palette: {
@@ -185,78 +172,60 @@ function Exercises(props) {
 
                 <Autocomplete
                   disablePortal
-                  inputValue={bodyPart}
-                  onInputChange={handleBodyPart}
+                  inputValue={type}
+                  onInputChange={handleType}
                   options={[
-                    "back",
                     "cardio",
-                    "chest",
-                    "lower arms",
-                    "lower legs",
-                    "neck",
-                    "shoulders",
-                    "upper arms",
-                    "upper legs",
-                    "waist",
+                    "olympic_weightlifting",
+                    "plyometrics",
+                    "powerlifting",
+                    "strength",
+                    "stretching",
+                    "strongman",
                   ]}
                   sx={{ width: "100%" }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Body Part" />
+                    <TextField {...params} label="Type" />
                   )}
                 />
                 <Autocomplete
                   disablePortal
-                  inputValue={equipment}
-                  onInputChange={handleEquipment}
+                  inputValue={muscle}
+                  onInputChange={handleMuscle}
                   options={[
-                    "assisted",
-                    "band",
-                    "barbell",
-                    "body weight",
-                    "bosu ball",
-                    "cable",
-                    "dumbbell",
-                    "elliptical machine",
-                    "ez barbell",
-                    "hammer",
-                    "kettlebell",
-                    "leverage machine",
-                    "medicine ball",
-                    "olympic barbell",
-                    "resistance band",
-                    "roller",
-                    "rope",
-                    "skierg machine",
-                    "sled machine",
-                    "smith machine",
-                    "stability ball",
-                    "stationary bike",
-                    "stepmill machine",
-                    "tire",
-                    "trap bar",
-                    "upper body ergometer",
-                    "weighted",
-                    "wheel roller",
+                    "abdominals",
+                    "abductors",
+                    "adductors",
+                    "biceps",
+                    "calves",
+                    "chest",
+                    "forearms",
+                    "glutes",
+                    "hamstrings",
+                    "lats",
+                    "lower_back",
+                    "middle_back",
+                    "neck",
+                    "quadriceps",
+                    "traps",
+                    "triceps",
                   ]}
                   sx={{ width: "100%" }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Equipament" />
+                    <TextField {...params} label="Muscle" />
+                  )}
+                />
+                <Autocomplete
+                  disablePortal
+                  inputValue={difficulty}
+                  onInputChange={handlDifficulty}
+                  options={["beginner", "intermediate", "expert"]}
+                  sx={{ width: "100%" }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Difficulty" />
                   )}
                 />
               </Stack>
-              <Button
-                sx={{
-                  backgroundColor: "primary.main",
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "primary.light",
-                  },
-                  mr: 2,
-                }}
-                // onClick={handleSubmit}
-              >
-                All Exercises
-              </Button>
               <Button
                 sx={{
                   backgroundColor: "primary.main",
@@ -270,7 +239,7 @@ function Exercises(props) {
                 Search
               </Button>
             </form>
-            {/* {exercises.length === 0 ? (
+            {exercises.length === 0 ? (
               <Typography fontSize={18} m={3} color="#FF0000">
                 {exercisesNotFound}
               </Typography>
@@ -282,23 +251,7 @@ function Exercises(props) {
                   oneExercise={exercise}
                 />
               ))
-            )} */}
-
-            {filteredExercises.length === 0
-              ? exercises.map((exercise, index) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    training_id={training_id}
-                    oneExercise={exercise}
-                  />
-                ))
-              : filteredExercises.map((exercise, index) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    training_id={training_id}
-                    oneExercise={exercise}
-                  />
-                ))}
+            )}
           </Box>
         </Box>
       </Box>

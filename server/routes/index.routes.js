@@ -16,25 +16,50 @@ router.get("/allPatients", async (req, res, next) => {
 });
 
 // Route Exercises
+// router.post("/exercisesApi", async (req, res, next) => {
+//   try {
+//     const { name, type, muscle, difficulty } = req.body;
+//     const config = {
+//       headers: {
+//         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+//       },
+//     };
+
+//     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+
+//     const ExercisesFromAPI = await axios.get(url, config);
+
+//     const exerciseWithIds = ExercisesFromAPI.data.map((exercise) => ({
+//       id: exercise.name.split(" ").join("_"),
+//       ...exercise,
+//     }));
+
+//     res.status(201).json(exerciseWithIds);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// Route Exercise New API
+
 router.post("/exercisesApi", async (req, res, next) => {
   try {
-    const { name, type, muscle, difficulty } = req.body;
+    // const { name, type, muscle, difficulty } = req.body;
     const config = {
+      params: { limit: "10" },
       headers: {
-        "X-Api-Key": process.env.REACT_APP_X_API_KEY,
+        "X-RapidAPI-Key": "c94219b3f1msh987d1bb4bab928bp1c4486jsna82aebf9e872",
+        "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
 
-    const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
+    const url = "https://exercisedb.p.rapidapi.com/exercises";
 
     const ExercisesFromAPI = await axios.get(url, config);
 
-    const exerciseWithIds = ExercisesFromAPI.data.map((exercise) => ({
-      id: exercise.name.split(" ").join("_"),
-      ...exercise,
-    }));
+    console.log("exeercises from API", ExercisesFromAPI.data);
 
-    res.status(201).json(exerciseWithIds);
+    res.status(201).json(ExercisesFromAPI.data);
   } catch (err) {
     next(err);
   }

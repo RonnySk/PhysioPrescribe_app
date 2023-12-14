@@ -9,6 +9,7 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
+import AllExercises from "./pages/AllExercises";
 import Patients from "./pages/Patients";
 import CreateTrainingPlan from "./pages/CreateTrainingPlan";
 // import AddExerciseTrainingPlan from "./pages/AddExerciseTrainingPlan";
@@ -54,6 +55,15 @@ function App() {
           element={
             <IsPrivate>
               <Exercises />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/allexercises"
+          element={
+            <IsPrivate>
+              <AllExercises />
             </IsPrivate>
           }
         />
