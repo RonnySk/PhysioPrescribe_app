@@ -61,8 +61,8 @@ function Exercises(props) {
 
   const handleName = (e) => setName(e.target.value);
   const handleBodyPart = (event, newInputValue) => setBodyPart(newInputValue);
-
   const handleEquipment = (event, newInputValue) => setEquipment(newInputValue);
+  const handleAllExercises = () => setFilteredExercises([]);
 
   const handleSubmit = () => {
     let ArrFilteredExercises = [];
@@ -253,7 +253,7 @@ function Exercises(props) {
                   },
                   mr: 2,
                 }}
-                // onClick={handleSubmit}
+                onClick={handleAllExercises}
               >
                 All Exercises
               </Button>
