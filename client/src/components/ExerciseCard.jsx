@@ -5,9 +5,23 @@ import appService from "../services/app.service";
 
 function ExerciseCard({ oneExercise, training_id }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
-  // console.log("teste do card", oneExercise, training_id);
 
   const handleAddExercise = () => {
+    const requestBody = { training_id, oneExercise };
+
+    appService
+      .addExercisesTrainingPlan(requestBody)
+      .then((response) => {
+        const { message } = response.data;
+        alert(message);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
+
+  const handleDeleteExercise = () => {
     const requestBody = { training_id, oneExercise };
 
     appService
@@ -44,7 +58,7 @@ function ExerciseCard({ oneExercise, training_id }) {
         <Typography variant="p" color="#808080">
           {oneExercise.instructions}
         </Typography>
-        {training_id && (
+        {/* {training_id && (
           <Button
             variant="contained"
             size="small"
@@ -61,7 +75,7 @@ function ExerciseCard({ oneExercise, training_id }) {
           >
             Add exercise
           </Button>
-        )}
+        )} */}
       </Stack>
     </React.Fragment>
   );

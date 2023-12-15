@@ -277,11 +277,31 @@ function Exercises(props) {
 
             {filteredExercises.length === 0
               ? exercises.map((exercise, index) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    training_id={training_id}
-                    oneExercise={exercise}
-                  />
+                  <>
+                    <ExerciseCard
+                      key={exercise.id}
+                      training_id={training_id}
+                      oneExercise={exercise}
+                    />
+                    {training_id && (
+                      <Button
+                        variant="contained"
+                        size="small"
+                        sx={{
+                          mr: 2,
+                          mb: 2,
+                          backgroundColor: "primary.main",
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "primary.light",
+                          },
+                        }}
+                        // onClick={handleAddExercise}
+                      >
+                        Add exercise
+                      </Button>
+                    )}
+                  </>
                 ))
               : filteredExercises.map((exercise, index) => (
                   <ExerciseCard
