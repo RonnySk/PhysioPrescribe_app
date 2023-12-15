@@ -4,6 +4,7 @@ import { Box, Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
+import ExerciseCard from "../components/ExerciseCard";
 import Loading from "../components/Loading/Loading";
 import appService from "../services/app.service";
 import Exercises from "./Exercises";
@@ -21,8 +22,7 @@ function OneTrainingPlan() {
       .then((response) => {
         const { oneTrainingPlan, exercisesFromTP } = response.data;
         setOneTrainingPlan(oneTrainingPlan);
-        // setTrainingPlanExercises(oneTrainingPlan.exercisesId);
-        console.log("exercises from TP", response.data.exercisesFromTP);
+        setTrainingPlanExercises(exercisesFromTP);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -70,8 +70,7 @@ function OneTrainingPlan() {
             justifyContent: "center",
             alignItems: "center",
             width: "100vw",
-
-            mt: 1,
+            mt: 5,
           }}
         >
           <Box
@@ -86,24 +85,22 @@ function OneTrainingPlan() {
               width: { xs: "90%", sm: "90%", md: "80%" },
             }}
           >
-            <Typography variant="h4" color="#808080" mt={2}>
+            <Typography variant="h4" color="#808080" mt={3}>
               Training Plan
             </Typography>
-
             {Object.keys(oneTrainingPlan).length === 0 ? (
               <Box>
                 <Loading />
               </Box>
             ) : (
               <>
-                <Stack mb={2}>
+                <Stack mb={2} mt={2}>
                   <Typography variant="p" fontSize={14} color="#808080">
                     Training Plan Name: {oneTrainingPlan.trainingName}
                   </Typography>
                   <Typography variant="p" fontSize={14} color="#808080">
                     Patient: {oneTrainingPlan.patientId.name}
                   </Typography>
-                  {/* card com os exercicios... */}
                 </Stack>
                 <Box
                   sx={{
@@ -141,11 +138,20 @@ function OneTrainingPlan() {
                       },
                     }}
                   >
-                    Delete
+                    Delete Training Plan
                   </Button>
                 </Box>
               </>
             )}
+            {trainingPlanExercises.length >= 1
+              ? trainingPlanExercises.map((exercise) => (
+                  <ExerciseCard
+                    key={exercise.id}
+                    training_id={training_id}
+                    oneExercise={exercise}
+                  />
+                ))
+              : null}{" "}
           </Box>
         </Box>
       </Box>
