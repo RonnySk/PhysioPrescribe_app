@@ -12,10 +12,11 @@ import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import ExerciseCard from "../components/ExerciseCard";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function Exercises(props) {
   const { training_id } = useParams();
+  const navigate = useNavigate();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
@@ -63,6 +64,8 @@ function Exercises(props) {
   const handleBodyPart = (event, newInputValue) => setBodyPart(newInputValue);
   const handleEquipment = (event, newInputValue) => setEquipment(newInputValue);
   const handleAllExercises = () => setFilteredExercises([]);
+
+  const handleOpenPlan = () => navigate(`/trainingplan/${training_id}`);
 
   const handleSubmit = () => {
     let ArrFilteredExercises = [];
@@ -138,6 +141,7 @@ function Exercises(props) {
                     backgroundColor: "primary.light",
                   },
                 }}
+                onClick={handleOpenPlan}
               >
                 Open Plan
               </Button>

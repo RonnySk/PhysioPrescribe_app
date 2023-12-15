@@ -7,7 +7,7 @@ function ExerciseCard({ oneExercise, training_id }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   // console.log("teste do card", oneExercise, training_id);
 
-  const handleSubmit = () => {
+  const handleAddExercise = () => {
     const requestBody = { training_id, oneExercise };
 
     appService
@@ -57,7 +57,7 @@ function ExerciseCard({ oneExercise, training_id }) {
                 backgroundColor: "primary.light",
               },
             }}
-            onClick={handleSubmit}
+            onClick={handleAddExercise}
           >
             Add exercise
           </Button>
