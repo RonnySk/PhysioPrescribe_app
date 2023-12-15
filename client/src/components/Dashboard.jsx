@@ -40,253 +40,454 @@ function Dashboard() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box
-        sx={{
-          backgroundColor: "black",
-          width: { sm: 256, md: 256 },
-          display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
-          flexDirection: "column",
-        }}
-        position="static"
-        color="white"
-      >
+      {user.isPhysiotherapist ? (
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "left",
-            p: 2,
-            borderBottom: 0.5,
-            borderColor: "#009BE514",
-            "&:hover": {
-              backgroundColor: "#009BE514",
-            },
+            backgroundColor: "black",
+            width: { sm: 256, md: 256 },
+            display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
+            flexDirection: "column",
           }}
+          position="static"
+          color="white"
         >
-          <HomeIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
-          <Link
-            href="/home"
-            underline="none"
-            color="#808080"
+          <Box
             sx={{
-              fontWeight: "bold",
-              ml: 2,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+              p: 2,
+              borderBottom: 0.5,
+              borderColor: "#009BE514",
+              "&:hover": {
+                backgroundColor: "#009BE514",
+              },
             }}
           >
-            Home
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "#101F33",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "left",
-
-            p: 2,
-            "&:hover": {
-              backgroundColor: "#3b82f680",
-            },
-          }}
-        >
-          <PeopleIcon sx={{ color: "#808080", margin: 1 }} fontSize="small" />
-          <Link
-            href="/patients"
-            underline="none"
-            color="#808080"
+            <HomeIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              href="/home"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
+              Home
+            </Link>
+          </Box>
+          <Box
             sx={{
-              fontWeight: "bold",
-              ml: 1,
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
             }}
           >
-            Patients
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "#101F33",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "left",
-
-            p: 2,
-            "&:hover": {
-              backgroundColor: "#3b82f680",
-            },
-          }}
-        >
-          <FitnessCenterIcon
-            sx={{ color: "#808080", ml: 1 }}
-            fontSize="small"
-          />
-          <Link
-            href="/exercises"
-            underline="none"
-            color="#808080"
-            sx={{
-              fontWeight: "bold",
-              ml: 2,
-            }}
-          >
-            Exercises
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "#101F33",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "left",
-
-            p: 2,
-            "&:hover": {
-              backgroundColor: "#3b82f680",
-            },
-          }}
-        >
-          <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
-          <Link
-            href="/trainingplans"
-            underline="none"
-            color="#808080"
-            sx={{
-              fontWeight: "bold",
-              ml: 2,
-            }}
-          >
-            Training Plans
-          </Link>
-        </Box>
-        <Box
-          sx={{
-            backgroundColor: "#101F33",
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "left",
-
-            p: 2,
-            borderBottom: 0.5,
-            borderColor: "#009BE514",
-            "&:hover": {
-              backgroundColor: "#3b82f680",
-            },
-          }}
-        >
-          <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
-          <Link
-            // href="/settings"
-            underline="none"
-            color="#808080"
-            sx={{
-              fontWeight: "bold",
-              ml: 2,
-            }}
-          >
-            Settings
-          </Link>
-        </Box>
-      </Box>
-
-      {/* From here Small Menu */}
-
-      <Box
-        sx={{
-          display: { xs: "flex", sm: "none", md: "none", lg: "none" },
-          justifyContent: "left",
-          backgroundColor: "primary.main",
-          borderTop: 1,
-          borderColor: "white",
-        }}
-      >
-        <Button
-          id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          onClick={handleClick}
-        >
-          <AppsIcon sx={{ color: "primary.dark" }} />
-        </Button>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem
-            onClick={handleClose}
-            sx={{
-              backgroundColor: "#EAEFF1",
-            }}
-          >
-            <PeopleIcon
-              sx={{ color: "primary.light", marginRight: 1 }}
-              fontSize="small"
-            />
-            <Link href="/patients" underline="none" color="primary.light">
+            <PeopleIcon sx={{ color: "#808080", margin: 1 }} fontSize="small" />
+            <Link
+              href="/patients"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 1,
+              }}
+            >
               Patients
             </Link>
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
+          </Box>
+          <Box
             sx={{
-              backgroundColor: "#EAEFF1",
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
             }}
           >
             <FitnessCenterIcon
-              sx={{ color: "primary.light", marginRight: 1 }}
+              sx={{ color: "#808080", ml: 1 }}
               fontSize="small"
             />
-            <Link href="/exercises" underline="none" color="primary.light">
+            <Link
+              href="/exercises"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
               Exercises
             </Link>
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
+          </Box>
+          <Box
             sx={{
-              backgroundColor: "#EAEFF1",
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
             }}
           >
-            <FolderOpenIcon
-              sx={{ color: "primary.light", marginRight: 1 }}
-              fontSize="small"
-            />
-            <Link href="//trainingplan" underline="none" color="primary.light">
-              Trainings Plan
+            <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              href="/trainingplans"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
+              Training Plans
             </Link>
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
+          </Box>
+          <Box
             sx={{
-              backgroundColor: "#EAEFF1",
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              borderBottom: 0.5,
+              borderColor: "#009BE514",
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
             }}
           >
-            <SettingsIcon
-              sx={{ color: "primary.light", marginRight: 1 }}
-              fontSize="small"
-            />
-            <Link href="/settings" underline="none" color="primary.light">
+            <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              // href="/settings"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
               Settings
             </Link>
-          </MenuItem>
-        </Menu>
-        <Typography
+          </Box>
+        </Box>
+      ) : (
+        <Box
           sx={{
-            display: "flex",
-            alignItems: "center",
+            backgroundColor: "black",
+            width: { sm: 256, md: 256 },
+            display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
+            flexDirection: "column",
+          }}
+          position="static"
+          color="white"
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+              p: 2,
+              borderBottom: 0.5,
+              borderColor: "#009BE514",
+              "&:hover": {
+                backgroundColor: "#009BE514",
+              },
+            }}
+          >
+            <HomeIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              href="/home"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
+              Home
+            </Link>
+          </Box>
+
+          <Box
+            sx={{
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
+            }}
+          >
+            <FolderOpenIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              href={`/patienttrainingplans/${user._id}`}
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
+              Training Plans
+            </Link>
+          </Box>
+          <Box
+            sx={{
+              backgroundColor: "#101F33",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "left",
+
+              p: 2,
+              borderBottom: 0.5,
+              borderColor: "#009BE514",
+              "&:hover": {
+                backgroundColor: "#3b82f680",
+              },
+            }}
+          >
+            <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
+            <Link
+              // href="/settings"
+              underline="none"
+              color="#808080"
+              sx={{
+                fontWeight: "bold",
+                ml: 2,
+              }}
+            >
+              Settings
+            </Link>
+          </Box>
+        </Box>
+      )}
+
+      {/* From here Small Menu */}
+      {user.isPhysiotherapist ? (
+        <Box
+          sx={{
+            display: { xs: "flex", sm: "none", md: "none", lg: "none" },
+            justifyContent: "left",
+            backgroundColor: "primary.main",
+            borderTop: 1,
+            borderColor: "white",
           }}
         >
-          {user.name}
-        </Typography>
-      </Box>
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <AppsIcon sx={{ color: "primary.dark" }} />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <HomeIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/home" underline="none" color="primary.light">
+                Home
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <PeopleIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/patients" underline="none" color="primary.light">
+                Patients
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <FitnessCenterIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/exercises" underline="none" color="primary.light">
+                Exercises
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <FolderOpenIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link
+                href={`/patienttrainingplans/${user._id}`}
+                underline="none"
+                color="primary.light"
+              >
+                Trainings Plan
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <SettingsIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/settings" underline="none" color="primary.light">
+                Settings
+              </Link>
+            </MenuItem>
+          </Menu>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {user.name}
+          </Typography>
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            display: { xs: "flex", sm: "none", md: "none", lg: "none" },
+            justifyContent: "left",
+            backgroundColor: "primary.main",
+            borderTop: 1,
+            borderColor: "white",
+          }}
+        >
+          <Button
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <AppsIcon sx={{ color: "primary.dark" }} />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <HomeIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/home" underline="none" color="primary.light">
+                Home
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <FolderOpenIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link
+                href={`/patienttrainingplans/${user._id}`}
+                underline="none"
+                color="primary.light"
+              >
+                Training Plans
+              </Link>
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              sx={{
+                backgroundColor: "#EAEFF1",
+              }}
+            >
+              <SettingsIcon
+                sx={{ color: "primary.light", marginRight: 1 }}
+                fontSize="small"
+              />
+              <Link href="/settings" underline="none" color="primary.light">
+                Settings
+              </Link>
+            </MenuItem>
+          </Menu>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {user.name}
+          </Typography>
+        </Box>
+      )}
     </ThemeProvider>
   );
 }

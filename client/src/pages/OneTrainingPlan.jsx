@@ -1,15 +1,16 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, Typography, Button } from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
 import ExerciseCard from "../components/ExerciseCard";
 import Loading from "../components/Loading/Loading";
+import { AuthContext } from "../context/auth.context";
 import appService from "../services/app.service";
-import Exercises from "./Exercises";
 
 function OneTrainingPlan() {
+  const { user } = useContext(AuthContext);
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [trainingPlanExercises, setTrainingPlanExercises] = useState([]);
@@ -102,45 +103,47 @@ function OneTrainingPlan() {
                     Patient: {oneTrainingPlan.patientId.name}
                   </Typography>
                 </Stack>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Button
-                    href={`/addexercises/${training_id}`}
-                    variant="contained"
-                    size="small"
+                {user.isPhysiotherapist ? (
+                  <Box
                     sx={{
-                      mr: 2,
-                      mb: 2,
-                      backgroundColor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "primary.light",
-                      },
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
                     }}
                   >
-                    Add exercise
-                  </Button>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={handleDelete}
-                    sx={{
-                      mb: 2,
-                      backgroundColor: "primary.main",
-                      color: "white",
-                      "&:hover": {
-                        backgroundColor: "primary.light",
-                      },
-                    }}
-                  >
-                    Delete Training Plan
-                  </Button>
-                </Box>
+                    <Button
+                      href={`/addexercises/${training_id}`}
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        mr: 2,
+                        mb: 2,
+                        backgroundColor: "primary.main",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "primary.light",
+                        },
+                      }}
+                    >
+                      Add exercise
+                    </Button>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      onClick={handleDelete}
+                      sx={{
+                        mb: 2,
+                        backgroundColor: "primary.main",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "primary.light",
+                        },
+                      }}
+                    >
+                      Delete Training Plan
+                    </Button>
+                  </Box>
+                ) : null}
               </>
             )}
             {trainingPlanExercises.length >= 1

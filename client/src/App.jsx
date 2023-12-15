@@ -7,7 +7,7 @@ import LandingPage from "./pages/LandingPage";
 import Navbar from "./components/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
-import HomePage from "./pages/HomPage/HomePage";
+import HomePage from "./pages/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
 import PatientTrainingPlans from "./pages/PatientTrainingPlans";
