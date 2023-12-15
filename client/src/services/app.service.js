@@ -19,9 +19,10 @@ class AppService {
     });
   }
 
-  // POST Create Training Plan
-  createTrainingPlan = async (requestBody) => {
-    return this.api.post("/api/createTrainingPlan", requestBody);
+  // GET One Patient
+
+  getOnePatient = async (patientId) => {
+    return this.api.get(`/api/onepatient/${patientId}`);
   };
 
   // GET All Patients
@@ -29,14 +30,24 @@ class AppService {
     return this.api.get("/api/allPatients");
   };
 
-  // GET Seacherd Patients Training
-  getSearchedPatientsTraining = async (searchInfo) => {
-    return this.api.get("/api/searchedtraining", searchInfo);
+  // GET All Patient Trainings Plans
+  getAllPatientTrainings = async (patientId) => {
+    return this.api.get(`/api/allpatienttrainings/${patientId}`);
   };
 
   // POST Exercises
   ExercisesAPI = async (requestBody) => {
     return this.api.post("/api/exercisesApi", requestBody);
+  };
+
+  // POST /api/examples/:id
+  addExercisesTrainingPlan = async (requestBody) => {
+    return this.api.post("/api/addExerciseTp", requestBody);
+  };
+
+  // POST Create Training Plan
+  createTrainingPlan = async (requestBody) => {
+    return this.api.post("/api/createTrainingPlan", requestBody);
   };
 
   // GET All Training Plans
@@ -47,11 +58,6 @@ class AppService {
   // GET One Training Plan
   getOneTrainingPlan = async (training_id) => {
     return this.api.get(`/api/onetrainingplan/${training_id}`);
-  };
-
-  // POST /api/examples/:id
-  addExercisesTrainingPlan = async (requestBody) => {
-    return this.api.post("/api/addExerciseTp", requestBody);
   };
 
   // DELETE One Training Plan

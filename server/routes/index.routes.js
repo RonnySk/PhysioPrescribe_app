@@ -9,8 +9,22 @@ const router = express.Router();
 router.get("/allPatients", async (req, res, next) => {
   try {
     const allPatients = await User.find({ isPhysiotherapist: "false" });
-    console.log("all Patients", allPatients);
+
     res.status(201).json({ allPatients });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// get One Patient Route
+
+router.get("/onepatient/:patientId", async (req, res, next) => {
+  try {
+    const { patientId } = req.params;
+
+    const onePatient = await User.findById(patientId);
+
+    res.status(201).json({ onePatient });
   } catch (err) {
     next(err);
   }
@@ -73,18 +87,15 @@ router.get("/trainingplans", async (req, res, next) => {
   }
 });
 
-// Search Patient and Training Plan
+// GET all Patient Training Plans
 
-router.get("/searchedtraining", async (req, res, next) => {
+router.get("/allpatienttrainings/:patientId", async (req, res, next) => {
   try {
-    const { searchInfo } = req.body;
+    const { patientId } = req.params;
 
-    // const searchedTrainingPlans = await TrainingPlan.find({
-    //   trainingName: searchInfo,
-    // });
+    const allPatientTrainingPlans = await TrainingPlan.find({ patientId });
 
-    console.log("req", req.body);
-    // res.status(201).json({ allTrainingPlans });
+    res.status(201).json({ allPatientTrainingPlans });
   } catch (err) {
     next(err);
   }

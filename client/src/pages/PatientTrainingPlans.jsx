@@ -5,6 +5,7 @@ import appService from "../services/app.service";
 import SearchIcon from "@mui/icons-material/Search";
 import FolderIcon from "@mui/icons-material/Folder";
 import Paper from "@mui/material/Paper";
+import { useParams } from "react-router-dom";
 import {
   Button,
   createTheme,
@@ -19,9 +20,13 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import Loading from "../components/Loading/Loading";
 
 function Patients() {
+  const { patientId } = useParams();
+  const [onePatient, setOnePatient] = useState({});
   const [allPatients, setAllPatients] = useState([]);
+  const [allPatientTrainingPlans, setAllPatientTrainingPlans] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [notFoundPatient, setNotFoundPatient] = useState("");
@@ -29,11 +34,24 @@ function Patients() {
 
   useEffect(() => {
     appService
-      .getAllPatients()
+      .getAllPatientTrainings(patientId)
       .then((response) => {
-        const { allPatients } = response.data;
-        setAllPatients(allPatients);
+        const { allPatientTrainingPlans } = response.data;
+        setAllPatientTrainingPlans(allPatientTrainingPlans);
       })
+
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+
+    appService
+      .getOnePatient(patientId)
+      .then((response) => {
+        const { onePatient } = response.data;
+        setOnePatient(onePatient);
+      })
+
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
@@ -106,7 +124,7 @@ function Patients() {
             }}
           >
             <Typography variant="h4" color="#808080" mt={3}>
-              Patients
+              {onePatient.name}
             </Typography>
             <Box
               sx={{
@@ -183,44 +201,35 @@ function Patients() {
                     }}
                   >
                     <TableCell sx={{ color: "white" }} align="center">
-                      Patient
+                      Training name
                     </TableCell>
                     <TableCell sx={{ color: "white" }} align="center">
-                      Trainings Plans
+                      Training Plan
                     </TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {filteredPatients.length === 0
-                    ? allPatients.map((onePatient) => (
-                        <TableRow key={onePatient._id}>
-                          <TableCell component="th" scope="row" align="center">
-                            {onePatient.name}
-                          </TableCell>
-                          <TableCell align="center">
-                            <IconButton
-                              href={`/patienttrainingplans/${onePatient._id}`}
-                            >
-                              <FolderIcon />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    : filteredPatients.map((onePatient) => (
-                        <TableRow key={onePatient._id}>
-                          <TableCell component="th" scope="row" align="center">
-                            {onePatient.name}
-                          </TableCell>
-                          <TableCell align="center">
-                            <IconButton
-                              href={`/patienttrainingplans/${onePatient._id}`}
-                            >
-                              <FolderIcon />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                  {allPatientTrainingPlans.length === 0 ? (
+                    <Box>
+                      <Loading />
+                    </Box>
+                  ) : (
+                    allPatientTrainingPlans.map((oneTraining) => (
+                      <TableRow key={oneTraining._id}>
+                        <TableCell component="th" scope="row" align="center">
+                          {oneTraining.trainingName}
+                        </TableCell>
+                        <TableCell align="center">
+                          <IconButton
+                          // href={`/trainingplan/${}`}
+                          >
+                            <FolderIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>

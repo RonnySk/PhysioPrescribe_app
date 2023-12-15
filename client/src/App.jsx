@@ -10,6 +10,7 @@ import IsAnon from "./components/IsAnon/IsAnon";
 import HomePage from "./pages/HomPage/HomePage";
 import Exercises from "./pages/Exercises";
 import Patients from "./pages/Patients";
+import PatientTrainingPlans from "./pages/PatientTrainingPlans";
 import CreateTrainingPlan from "./pages/CreateTrainingPlan";
 import OneTrainingPlan from "./pages/OneTrainingPlan";
 import AllTrainingPlans from "./pages/AllTrainingPlans";
@@ -71,6 +72,15 @@ function App() {
           element={
             <IsPrivate>
               <Patients />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/patienttrainingplans/:patientId"
+          element={
+            <IsPrivate>
+              <PatientTrainingPlans />
             </IsPrivate>
           }
         />
