@@ -43,7 +43,7 @@ function AllTrainingPlans() {
 
   const handleSearchInput = (e) => {
     e.preventDefault();
-    setSearchInput(e.target.value);
+    setSearchInput(e.target.value.toLowerCase());
   };
 
   const handleSearchSubmit = () => {
@@ -188,7 +188,9 @@ function AllTrainingPlans() {
                   <TableRow
                     sx={{ backgroundColor: "primary.main", color: "#000000" }}
                   >
-                    <TableCell sx={{ color: "white" }}>Patient</TableCell>
+                    <TableCell sx={{ color: "white" }} align="center">
+                      Patient
+                    </TableCell>
                     <TableCell sx={{ color: "white" }} align="center">
                       Training Name
                     </TableCell>
@@ -199,7 +201,7 @@ function AllTrainingPlans() {
                   {filteredTrainingPlans.length === 0
                     ? allTrainingPlans.map((oneTrainingPlan) => (
                         <TableRow key={oneTrainingPlan._id}>
-                          <TableCell component="th" scope="row">
+                          <TableCell component="th" scope="row" align="center">
                             {oneTrainingPlan.patientId.name}
                           </TableCell>
                           <TableCell align="center">
@@ -216,7 +218,7 @@ function AllTrainingPlans() {
                       ))
                     : filteredTrainingPlans.map((oneTrainingPlan) => (
                         <TableRow key={oneTrainingPlan._id}>
-                          <TableCell component="th" scope="row">
+                          <TableCell component="th" scope="row" align="center">
                             {oneTrainingPlan.patientId.name}
                           </TableCell>
                           <TableCell align="center">
