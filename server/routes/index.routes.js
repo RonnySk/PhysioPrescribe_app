@@ -182,4 +182,17 @@ router.delete("/onetrainingplan/:training_id", async (req, res, next) => {
   }
 });
 
+// Delete One Patient Routee
+router.post("/deletpatient", async (req, res, next) => {
+  try {
+    const { userId } = req.body;
+
+    const deletePatient = await User.findByIdAndRemove(userId);
+
+    res.status(201).json({ message: "Account successfully removed" });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

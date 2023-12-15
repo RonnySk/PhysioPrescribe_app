@@ -105,7 +105,7 @@ function HomePage() {
               Training Plans
             </Link>
             <Link
-              // href="/exercises"
+              href="/account"
               sx={{
                 backgroundColor: "white",
                 border: 1,
@@ -116,7 +116,7 @@ function HomePage() {
               }}
               underline="none"
             >
-              Settings
+              Account
             </Link>
           </Stack>
         )}

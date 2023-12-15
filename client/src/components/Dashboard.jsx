@@ -180,7 +180,7 @@ function Dashboard() {
           >
             <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
             <Link
-              href="/settings"
+              href="/account"
               underline="none"
               color="#808080"
               sx={{
@@ -188,7 +188,7 @@ function Dashboard() {
                 ml: 2,
               }}
             >
-              Settings
+              Account
             </Link>
           </Box>
         </Box>
@@ -276,7 +276,7 @@ function Dashboard() {
           >
             <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
             <Link
-              href="/settings"
+              href="/account"
               underline="none"
               color="#808080"
               sx={{
@@ -284,7 +284,7 @@ function Dashboard() {
                 ml: 2,
               }}
             >
-              Settings
+              Account
             </Link>
           </Box>
         </Box>
@@ -389,8 +389,8 @@ function Dashboard() {
                 sx={{ color: "primary.light", marginRight: 1 }}
                 fontSize="small"
               />
-              <Link href="/settings" underline="none" color="primary.light">
-                Settings
+              <Link href="/account" underline="none" color="primary.light">
+                Account
               </Link>
             </MenuItem>
           </Menu>
@@ -473,8 +473,8 @@ function Dashboard() {
                 sx={{ color: "primary.light", marginRight: 1 }}
                 fontSize="small"
               />
-              <Link href="/settings" underline="none" color="primary.light">
-                Settings
+              <Link href="/account" underline="none" color="primary.light">
+                Account
               </Link>
             </MenuItem>
           </Menu>

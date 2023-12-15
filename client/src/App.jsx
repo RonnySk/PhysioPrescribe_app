@@ -15,6 +15,7 @@ import CreateTrainingPlan from "./pages/CreateTrainingPlan";
 import OneTrainingPlan from "./pages/OneTrainingPlan";
 import AllTrainingPlans from "./pages/AllTrainingPlans";
 import Settings from "@mui/icons-material/Settings";
+import Account from "./pages/Account";
 
 function App() {
   return (
@@ -114,10 +115,10 @@ function App() {
         />
 
         <Route
-          path="/settings"
+          path="/account"
           element={
             <IsPrivate>
-              <Settings />
+              <Account />
             </IsPrivate>
           }
         />

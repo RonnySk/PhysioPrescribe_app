@@ -64,6 +64,11 @@ class AppService {
   deleteOneTrainingPlan = async (training_id) => {
     return this.api.delete(`/api/onetrainingplan/${training_id}`);
   };
+
+  // DELETE One Patient
+  deletePatient = async (requestBody) => {
+    return this.api.post("/api/deletpatient", requestBody);
+  };
 }
 
 // Create one instance of the service
