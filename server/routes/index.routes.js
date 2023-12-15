@@ -5,6 +5,7 @@ const TrainingPlan = require("../models/TrainingPlan.models");
 const router = express.Router();
 
 // get all Patients Route
+
 router.get("/allPatients", async (req, res, next) => {
   try {
     const allPatients = await User.find({ isPhysiotherapist: "false" });
@@ -15,32 +16,7 @@ router.get("/allPatients", async (req, res, next) => {
   }
 });
 
-// Route Exercises
-// router.post("/exercisesApi", async (req, res, next) => {
-//   try {
-//     const { name, type, muscle, difficulty } = req.body;
-//     const config = {
-//       headers: {
-//         "X-Api-Key": process.env.REACT_APP_X_API_KEY,
-//       },
-//     };
-
-//     const url = `https://api.api-ninjas.com/v1/exercises?name=${name}&type=${type}&muscle=${muscle}&difficulty=${difficulty}`;
-
-//     const ExercisesFromAPI = await axios.get(url, config);
-
-//     const exerciseWithIds = ExercisesFromAPI.data.map((exercise) => ({
-//       id: exercise.name.split(" ").join("_"),
-//       ...exercise,
-//     }));
-
-//     res.status(201).json(exerciseWithIds);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
-// Route Exercise New API
+// Route Exercise API
 
 router.post("/exercisesApi", async (req, res, next) => {
   try {
@@ -54,11 +30,11 @@ router.post("/exercisesApi", async (req, res, next) => {
 
     const url = "https://exercisedb.p.rapidapi.com/exercises";
 
-    const ExercisesFromAPI = await axios.get(url, config);
+    const exercisesFromAPI = await axios.get(url, config);
 
-    console.log("exeercises from API", ExercisesFromAPI.data);
+    console.log("exeercises from API", exercisesFromAPI.data);
 
-    res.status(201).json(ExercisesFromAPI.data);
+    res.status(201).json(exercisesFromAPI.data);
   } catch (err) {
     next(err);
   }
@@ -87,6 +63,7 @@ router.post("/addExerciseTp", async (req, res, next) => {
 });
 
 //get all Training PLans
+
 router.get("/trainingplans", async (req, res, next) => {
   try {
     const allTrainingPlans = await TrainingPlan.find().populate("patientId");
@@ -114,6 +91,7 @@ router.get("/searchedtraining", async (req, res, next) => {
 });
 
 // create new Training Plan
+
 router.post("/createTrainingPlan", async (req, res, next) => {
   try {
     const { therapeutId, patientId, trainingName, trainingDescription } =
@@ -139,6 +117,7 @@ router.post("/createTrainingPlan", async (req, res, next) => {
 });
 
 // get One Training Plan Route
+
 router.get("/onetrainingplan/:training_id", async (req, res, next) => {
   try {
     const { training_id } = req.params;
@@ -147,27 +126,32 @@ router.get("/onetrainingplan/:training_id", async (req, res, next) => {
       "patientId"
     );
 
-    const exercisesOnTP = await Promise.all(
-      oneTrainingPlan.exercisesId.map(async (exercise) => {
-        const exerciseName = exercise.split("_").join(" ");
+    let exercisesFromApi = oneTrainingPlan.exercisesId.map(async (Id) => {
+      const config = {
+        params: { limit: "10" },
+        headers: {
+          "X-RapidAPI-Key": process.env.RAPID_API_KEY,
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        },
+      };
+      const url = `https://exercisedb.p.rapidapi.com/exercises/exercise/${Id}`;
 
-        const config = {
-          headers: {
-            "X-Api-Key": process.env.REACT_APP_X_API_KEY,
-          },
-        };
+      const exercisesFromAPI = await axios.get(url, config);
 
-        const url = `https://api.api-ninjas.com/v1/exercises?name=${exerciseName}`;
+      return exercisesFromAPI.data;
+    });
 
-        const findExerciseApi = await axios.get(url, config);
+    const promiseExercisesFromTP = Promise.all(exercisesFromApi);
 
-        return findExerciseApi.data;
-      })
-    );
-
-    console.log("treino com populate", exercisesOnTP);
-    // res.status(201).json({ oneTrainingPlan});
-    res.status(201).json({ exercisesOnTP });
+    try {
+      const exercisesFromTP = await promiseExercisesFromTP;
+      res.status(201).json({
+        oneTrainingPlan,
+        exercisesFromTP,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   } catch (err) {
     next(err);
   }

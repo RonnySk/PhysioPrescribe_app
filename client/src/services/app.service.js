@@ -49,7 +49,7 @@ class AppService {
     return this.api.get(`/api/onetrainingplan/${training_id}`);
   };
 
-  // PUT /api/examples/:id
+  // POST /api/examples/:id
   addExercisesTrainingPlan = async (requestBody) => {
     return this.api.post("/api/addExerciseTp", requestBody);
   };

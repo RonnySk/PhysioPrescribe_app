@@ -117,7 +117,7 @@ function Exercises(props) {
                 alignItems: "center",
               }}
             >
-              <Stack mb={2}>
+              <Stack mb={2} alignItems="flex-start">
                 <Typography variant="p" fontSize={14} color="#808080">
                   Training Plan: {oneTrainingPlan.trainingName}
                 </Typography>

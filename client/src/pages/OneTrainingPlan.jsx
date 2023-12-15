@@ -19,9 +19,10 @@ function OneTrainingPlan() {
     appService
       .getOneTrainingPlan(training_id)
       .then((response) => {
-        // const { oneTrainingPlan } = response.data;
-        console.log("response from execises", response.data);
-        // setOneTrainingPlan(oneTrainingPlan);
+        const { oneTrainingPlan, exercisesFromTP } = response.data;
+        setOneTrainingPlan(oneTrainingPlan);
+        // setTrainingPlanExercises(oneTrainingPlan.exercisesId);
+        console.log("exercises from TP", response.data.exercisesFromTP);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -42,7 +43,6 @@ function OneTrainingPlan() {
       });
   };
 
-  console.log("training ID", training_id);
   let theme = createTheme({
     palette: {
       primary: {

@@ -1,9 +1,10 @@
 import { Button, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import React from "react";
+import React, { useState } from "react";
 import appService from "../services/app.service";
 
 function ExerciseCard({ oneExercise, training_id }) {
+  const [errorMessage, setErrorMessage] = useState(undefined);
   // console.log("teste do card", oneExercise, training_id);
 
   const handleSubmit = () => {
@@ -17,7 +18,7 @@ function ExerciseCard({ oneExercise, training_id }) {
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
-        // setErrorMessage(errorDescription);
+        setErrorMessage(errorDescription);
       });
   };
 
