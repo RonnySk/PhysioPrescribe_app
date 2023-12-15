@@ -24,7 +24,8 @@ import Paper from "@mui/material/Paper";
 function AllTrainingPlans() {
   const [allTrainingPlans, setAllTrainingPlans] = useState([]);
   const [filteredTrainingPlans, setfilteredTrainingPlans] = useState([]);
-  const [searchInput, setSearchInput] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [notFoundTrainingPlan, setNotFoundTrainingPlan] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   useEffect(() => {
@@ -42,18 +43,24 @@ function AllTrainingPlans() {
 
   const handleSearchInput = (e) => {
     e.preventDefault();
-    setSearchInput(e.target.value.toLowerCase());
+    setSearchInput(e.target.value);
   };
 
   const handleSearchSubmit = () => {
+    setNotFoundTrainingPlan("");
+
     const filteredTrainings = allTrainingPlans.filter((oneTraining) => {
-      if (searchInput === "") {
-        return oneTraining;
-      } else {
-        return oneTraining.trainingName.toLowerCase().includes(searchInput);
+      if (searchInput !== "") {
+        if (oneTraining.patientId.name.toLowerCase().includes(searchInput))
+          return oneTraining;
       }
     });
-    setfilteredTrainingPlans(filteredTrainings);
+
+    if (filteredTrainings.length === 0) {
+      setNotFoundTrainingPlan("Patient not found!");
+    } else {
+      setfilteredTrainingPlans(filteredTrainings);
+    }
   };
 
   let theme = createTheme({
@@ -121,7 +128,10 @@ function AllTrainingPlans() {
                     backgroundColor: "primary.light",
                   },
                 }}
-                onClick={() => setfilteredTrainingPlans([])}
+                onClick={() => {
+                  setfilteredTrainingPlans([]);
+                  setNotFoundTrainingPlan("");
+                }}
               >
                 All Training Plans
               </Button>
@@ -166,6 +176,11 @@ function AllTrainingPlans() {
                 <SearchIcon />
               </IconButton>
             </Box>
+            {notFoundTrainingPlan !== "" ? (
+              <Typography variant="p" color="red" mt={1} mb={2}>
+                {notFoundTrainingPlan}
+              </Typography>
+            ) : null}
 
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: "70%" }}>
