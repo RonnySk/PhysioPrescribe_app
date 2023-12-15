@@ -180,7 +180,7 @@ function Dashboard() {
           >
             <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
             <Link
-              // href="/settings"
+              href="/settings"
               underline="none"
               color="#808080"
               sx={{
@@ -276,7 +276,7 @@ function Dashboard() {
           >
             <SettingsIcon sx={{ color: "#808080", ml: 1 }} fontSize="small" />
             <Link
-              // href="/settings"
+              href="/settings"
               underline="none"
               color="#808080"
               sx={{
