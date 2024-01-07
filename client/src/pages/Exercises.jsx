@@ -18,6 +18,7 @@ function Exercises(props) {
   const { training_id } = useParams();
   const navigate = useNavigate();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
+  const [oneExercise, setOneExercise] = useState({});
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
   const [equipment, setEquipment] = useState("");
@@ -25,8 +26,6 @@ function Exercises(props) {
   const [filteredExercises, setFilteredExercises] = useState([]);
   const [exercisesNotFound, setExerciseNotFound] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  console.log("id do TP no Params", training_id);
 
   useEffect(() => {
     setExercises([]);
@@ -79,8 +78,23 @@ function Exercises(props) {
         return ArrFilteredExercises.push(oneExercise);
       }
 
-      setFilteredExercises(ArrFilteredExercises);
+      return setFilteredExercises(ArrFilteredExercises);
     });
+  };
+
+  const handleAddExercise = () => {
+    const requestBody = { training_id, oneExercise };
+
+    appService
+      .addExercisesTrainingPlan(requestBody)
+      .then((response) => {
+        const { message } = response.data;
+        alert(message);
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
   };
 
   let theme = createTheme({
@@ -283,6 +297,7 @@ function Exercises(props) {
                       training_id={training_id}
                       oneExercise={exercise}
                     />
+                    {/* {setOneExercise(exercise)} */}
                     {training_id && (
                       <Button
                         variant="contained"
@@ -296,7 +311,7 @@ function Exercises(props) {
                             backgroundColor: "primary.light",
                           },
                         }}
-                        // onClick={handleAddExercise}
+                        onClick={handleAddExercise}
                       >
                         Add exercise
                       </Button>
@@ -304,11 +319,30 @@ function Exercises(props) {
                   </>
                 ))
               : filteredExercises.map((exercise, index) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    training_id={training_id}
-                    oneExercise={exercise}
-                  />
+                  <>
+                    <ExerciseCard
+                      key={exercise.id}
+                      training_id={training_id}
+                      oneExercise={exercise}
+                    />
+                    {/* {setOneExercise(exercise)} */}
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        mr: 2,
+                        mb: 2,
+                        backgroundColor: "primary.main",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "primary.light",
+                        },
+                      }}
+                      onClick={handleAddExercise}
+                    >
+                      Add exercise
+                    </Button>
+                  </>
                 ))}
           </Box>
         </Box>

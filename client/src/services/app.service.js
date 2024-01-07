@@ -67,7 +67,12 @@ class AppService {
 
   // DELETE One Patient
   deletePatient = async (requestBody) => {
-    return this.api.post("/api/deletpatient", requestBody);
+    return this.api.post("/api/deletepatient", requestBody);
+  };
+
+  // DELETE One Exercise
+  deleteExerciseTrainingPlan = async (requestBody) => {
+    return this.api.post("/api/deleteoneexercise", requestBody);
   };
 }
 

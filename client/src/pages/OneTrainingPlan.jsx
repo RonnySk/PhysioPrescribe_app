@@ -29,7 +29,7 @@ function OneTrainingPlan() {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
-  }, []);
+  }, [training_id]);
 
   const handleDelete = () => {
     appService

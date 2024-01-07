@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
-import Loading from "../components/Loading/Loading";
 import appService from "../services/app.service";
 import SearchIcon from "@mui/icons-material/Search";
 import FolderIcon from "@mui/icons-material/Folder";

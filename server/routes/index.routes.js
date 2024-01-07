@@ -139,7 +139,7 @@ router.get("/onetrainingplan/:training_id", async (req, res, next) => {
 
     let exercisesFromApi = oneTrainingPlan.exercisesId.map(async (Id) => {
       const config = {
-        params: { limit: "10" },
+        params: { limit: "30" },
         headers: {
           "X-RapidAPI-Key": process.env.RAPID_API_KEY,
           "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
@@ -183,13 +183,31 @@ router.delete("/onetrainingplan/:training_id", async (req, res, next) => {
 });
 
 // Delete One Patient Routee
-router.post("/deletpatient", async (req, res, next) => {
+router.post("/deletepatient", async (req, res, next) => {
   try {
     const { userId } = req.body;
 
     const deletePatient = await User.findByIdAndRemove(userId);
 
     res.status(201).json({ message: "Account successfully removed" });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Update/delete exercises on Training Plan
+
+router.post("/deleteoneexercise", async (req, res, next) => {
+  try {
+    const { training_id, oneExercise } = req.body;
+
+    const findAndDeleteExercise = await TrainingPlan.findByIdAndUpdate(
+      training_id,
+      {
+        $pull: { exercisesId: oneExercise.id },
+      }
+    );
+    res.status(201).json({ message: "Exercise successfully removed" });
   } catch (err) {
     next(err);
   }

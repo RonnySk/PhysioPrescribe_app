@@ -41,17 +41,6 @@ function SignupPage() {
       isPhysiotherapist,
     };
 
-    // Send a request to the server using axios
-    /* 
-    const authToken = localStorage.getItem("authToken");
-    axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/auth/signup`, 
-      requestBody, 
-      { headers: { Authorization: `Bearer ${authToken}` },
-    })
-    .then((response) => {})
-    */
-
     // Or using a service
     authService
       .signup(requestBody)

@@ -14,7 +14,6 @@ import PatientTrainingPlans from "./pages/PatientTrainingPlans";
 import CreateTrainingPlan from "./pages/CreateTrainingPlan";
 import OneTrainingPlan from "./pages/OneTrainingPlan";
 import AllTrainingPlans from "./pages/AllTrainingPlans";
-import Settings from "@mui/icons-material/Settings";
 import Account from "./pages/Account";
 
 function App() {
