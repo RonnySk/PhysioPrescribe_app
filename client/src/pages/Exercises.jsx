@@ -20,7 +20,6 @@ function Exercises(props) {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
-  const [oneExercise, setOneExercise] = useState({});
   const [name, setName] = useState("");
   const [bodyPart, setBodyPart] = useState("");
   const [equipment, setEquipment] = useState("");

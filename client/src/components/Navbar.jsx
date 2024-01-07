@@ -10,7 +10,6 @@ import {
   MenuItem,
   Stack,
   Link,
-  Typography,
   createTheme,
   ThemeProvider,
   ListItemIcon,
@@ -22,7 +21,7 @@ import Logout from "@mui/icons-material/Logout";
 import logoSide from "../images/logo_side.png";
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
