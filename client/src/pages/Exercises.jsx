@@ -8,14 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard";
 import appService from "../services/app.service";
 import ExerciseCard from "../components/ExerciseCard";
 import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
 function Exercises(props) {
   const { training_id } = useParams();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
   const [oneExercise, setOneExercise] = useState({});
@@ -82,9 +84,8 @@ function Exercises(props) {
     });
   };
 
-  const handleAddExercise = () => {
-    const requestBody = { training_id, oneExercise };
-
+  const handleAddExercise = (exercise) => {
+    const requestBody = { training_id, exercise };
     appService
       .addExercisesTrainingPlan(requestBody)
       .then((response) => {
@@ -297,8 +298,7 @@ function Exercises(props) {
                       training_id={training_id}
                       oneExercise={exercise}
                     />
-                    {/* {setOneExercise(exercise)} */}
-                    {training_id && (
+                    {!user.isPhysiotherapist ? null : training_id ? (
                       <Button
                         variant="contained"
                         size="small"
@@ -311,11 +311,13 @@ function Exercises(props) {
                             backgroundColor: "primary.light",
                           },
                         }}
-                        onClick={handleAddExercise}
+                        onClick={() => {
+                          handleAddExercise(exercise);
+                        }}
                       >
                         Add exercise
                       </Button>
-                    )}
+                    ) : null}
                   </>
                 ))
               : filteredExercises.map((exercise, index) => (
@@ -325,23 +327,26 @@ function Exercises(props) {
                       training_id={training_id}
                       oneExercise={exercise}
                     />
-                    {/* {setOneExercise(exercise)} */}
-                    <Button
-                      variant="contained"
-                      size="small"
-                      sx={{
-                        mr: 2,
-                        mb: 2,
-                        backgroundColor: "primary.main",
-                        color: "white",
-                        "&:hover": {
-                          backgroundColor: "primary.light",
-                        },
-                      }}
-                      onClick={handleAddExercise}
-                    >
-                      Add exercise
-                    </Button>
+                    {!user.isPhysiotherapist ? null : training_id ? (
+                      <Button
+                        variant="contained"
+                        size="small"
+                        sx={{
+                          mr: 2,
+                          mb: 2,
+                          backgroundColor: "primary.main",
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "primary.light",
+                          },
+                        }}
+                        onClick={() => {
+                          handleAddExercise(exercise);
+                        }}
+                      >
+                        Add exercise
+                      </Button>
+                    ) : null}
                   </>
                 ))}
           </Box>

@@ -58,12 +58,11 @@ router.post("/exercisesApi", async (req, res, next) => {
 
 router.post("/addExerciseTp", async (req, res, next) => {
   try {
-    const { training_id, oneExercise } = req.body;
-
+    const { training_id, exercise } = req.body;
     const findandUpdateTrainingPlan = await TrainingPlan.findByIdAndUpdate(
       training_id,
       {
-        $push: { exercisesId: oneExercise.id },
+        $push: { exercisesId: exercise.id },
       },
       {
         new: true,
@@ -199,12 +198,12 @@ router.post("/deletepatient", async (req, res, next) => {
 
 router.post("/deleteoneexercise", async (req, res, next) => {
   try {
-    const { training_id, oneExercise } = req.body;
+    const { training_id, exercise } = req.body;
 
     const findAndDeleteExercise = await TrainingPlan.findByIdAndUpdate(
       training_id,
       {
-        $pull: { exercisesId: oneExercise.id },
+        $pull: { exercisesId: exercise.id },
       }
     );
     res.status(201).json({ message: "Exercise successfully removed" });

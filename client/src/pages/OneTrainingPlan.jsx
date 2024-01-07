@@ -13,6 +13,7 @@ function OneTrainingPlan() {
   const { user } = useContext(AuthContext);
   const { training_id } = useParams();
   const [oneTrainingPlan, setOneTrainingPlan] = useState({});
+  const [oneExercise, setOneExercise] = useState({});
   const [trainingPlanExercises, setTrainingPlanExercises] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
@@ -31,12 +32,27 @@ function OneTrainingPlan() {
       });
   }, [training_id]);
 
-  const handleDelete = () => {
+  const handleDeleteTrainigPlan = () => {
     appService
       .deleteOneTrainingPlan(training_id)
       .then((response) => {
         alert("Training Plan removed successfully!");
         navigate("/trainingplans");
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
+
+  const handleDeleteExercise = (exercise) => {
+    const requestBody = { training_id, exercise };
+    appService
+      .deleteExerciseTrainingPlan(requestBody)
+      .then((response) => {
+        const { message } = response.data;
+        alert(message);
+        window.location.reload(false);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -130,7 +146,7 @@ function OneTrainingPlan() {
                     <Button
                       variant="contained"
                       size="small"
-                      onClick={handleDelete}
+                      onClick={handleDeleteTrainigPlan}
                       sx={{
                         mb: 2,
                         backgroundColor: "primary.main",
@@ -148,11 +164,33 @@ function OneTrainingPlan() {
             )}
             {trainingPlanExercises.length >= 1
               ? trainingPlanExercises.map((exercise) => (
-                  <ExerciseCard
-                    key={exercise.id}
-                    training_id={training_id}
-                    oneExercise={exercise}
-                  />
+                  <>
+                    <ExerciseCard
+                      key={exercise.id}
+                      training_id={training_id}
+                      oneExercise={exercise}
+                    />
+                    {user.isPhysiotherapist ? (
+                      <Button
+                        variant="contained"
+                        size="small"
+                        sx={{
+                          mr: 2,
+                          mb: 2,
+                          backgroundColor: "primary.main",
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "primary.light",
+                          },
+                        }}
+                        onClick={() => {
+                          handleDeleteExercise(exercise);
+                        }}
+                      >
+                        Delete exercise
+                      </Button>
+                    ) : null}
+                  </>
                 ))
               : null}{" "}
           </Box>
