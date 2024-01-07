@@ -4,9 +4,10 @@
 https://physioprescribe.vercel.app/
 
 # About
-PhysioPrescribe is a Webapp to create, manage and display Physical Therapie Exercises Plan. 
+PysioPrescribe is a Full-stack App to create, manage, and display a Physical therapy exercise plan.
 
-The App has two diferent areas, one for the Professional (create, update and delete exercies plans) and another one for the Pacient (to view their own exercises plans).
+The App has two different areas, one for the Professional (create, update, and delete exercise plans) and another one for the Patient (to view their own exercise plans)
+
 
 # Technologies
 - JavaScript (REACT)
