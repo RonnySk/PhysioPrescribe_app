@@ -20,7 +20,7 @@ import appService from "../services/app.service";
 
 function CreateTrainingPlan() {
   const { user } = useContext(AuthContext);
-  const [therapeutId, setUserId] = useState(user._id);
+  const [therapeutId, setTherapeutId] = useState(user._id);
   const [allPatients, setAllPatients] = useState([]);
   const [patientName, setPatientName] = useState("");
   const [patientId, setPatientId] = useState("");
@@ -63,7 +63,6 @@ function CreateTrainingPlan() {
       .createTrainingPlan(requestBody)
       .then((response) => {
         const { newTrainingPlan } = response.data;
-        console.log("response API", newTrainingPlan._id);
         navigate(`/trainingplan/${newTrainingPlan._id}`);
       })
       .catch((error) => {

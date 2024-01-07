@@ -58,7 +58,7 @@ function Exercises(props) {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
-  }, []);
+  }, [training_id]);
 
   const handleName = (e) => setName(e.target.value);
   const handleBodyPart = (event, newInputValue) => setBodyPart(newInputValue);
